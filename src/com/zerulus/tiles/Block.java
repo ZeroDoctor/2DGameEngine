@@ -1,6 +1,7 @@
 package com.zerulus.tiles;
 
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 import com.zerulus.graphics.Sprite;
 import com.zerulus.util.Vector2f;
@@ -8,16 +9,12 @@ import com.zerulus.util.Vector2f;
 public class Block {
 
 	private Vector2f pos;
-	private TileSheet ts;
-	private int id;
+        private BufferedImage img;
 
 	public Block(int id, Vector2f pos, TileSheet ts) {
-		this.ts = ts;
 		this.pos = pos;
-		this.id = id;
-		// get the width and height of the tileSheet
-		// and the columns, so based on that
-		// get the Block img from the tileSheet
+                //this line LOL
+                img = ts.getTileSheet().getSprite(id / ts.getTileSheet().getWidth(), id % ts.getTileSheet().getWidth());
 	}
 
 	public void update() {
@@ -26,7 +23,7 @@ public class Block {
 
 	public void render(Graphics2D g) {
 		// later implement the width and height
-		g.drawImage(ts.getTileSheet().getSprite(id / ts.getTileSheet().getWidth(), id % ts.getTileSheet().getWidth()), (int) pos.x, (int) pos.y, null);
+		g.drawImage(img, (int) pos.x, (int) pos.y, null);
 	}
 
 }
