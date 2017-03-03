@@ -1,74 +1,65 @@
 package com.zerulus.util;
 
+import com.zerulus.tiles.TileManager;
 
 //Sort of
 public class AABB {
 
-	private Vector2f pos;
-	private float w;
-	private float h;
-	private float r;
+    private Vector2f pos;
+    private float w;
+    private float h;
 
-	public AABB() {
+    public AABB(Vector2f pos, int w, int h) {
+        //places x and y at the center
+        this.pos = pos;
+        this.w = w;
+        this.h = h;
+    }
 
-	}
+    public void setBox(Vector2f pos, int w, int h) {
+        this.pos = pos;
+        this.w = w;
+        this.h = h;
+    }
 
-	public AABB(Vector2f pos, int w, int h) {
-		//places x and y at the center
-		this.pos = new Vector2f(pos.x + (w / 2), pos.y + (h / 2));
-		this.w = w / 2;
-		this.h = h / 2;
-	}
-
-	public AABB(Vector2f pos, int r) {
-		this.pos = new Vector2f(pos.x + (r / 2), pos.y + (r / 2));
-		this.r = (r / (float) Math.sqrt(2));
-	}
-
-	public void setBox(Vector2f pos, int w, int h) {
-		this.pos = new Vector2f(pos.x + (w / 2), pos.y + (h / 2));
-		this.w = w / 2;
-		this.h = h / 2;
-	}
-
-	public void setCircle(Vector2f pos, int r) {
-		this.pos = new Vector2f(pos.x + (r / (float) Math.sqrt(2)), pos.y + (r / (float) Math.sqrt(2)));
-		this.r = (r / (float) Math.sqrt(2));
-	}
-
-	public boolean colCircletoBox(AABB aBox, AABB bCircle) {
-		float xDelta = bCircle.pos.x - Math.max(aBox.pos.x, Math.min(bCircle.pos.x, aBox.pos.x + aBox.w));
-		float yDelta = bCircle.pos.y - Math.max(aBox.pos.y, Math.min(bCircle.pos.y, aBox.pos.y + aBox.h));
-
-		if((xDelta * xDelta + yDelta * yDelta) < (bCircle.r * bCircle.r)) {
-			return true;
-		}
-
-		return false;
-	}
-
-	public boolean circlesCollides(AABB aCircle, AABB bCircle) {
-		float xd = aCircle.pos.x - bCircle.pos.x;
-		float yd = aCircle.pos.y - bCircle.pos.y;
-		float disSq = xd * xd + yd * yd;
-
-		if(disSq < (aCircle.r + bCircle.r) * (aCircle.r + bCircle.r)) {
-			return true;
-		}
-
-		return false;
-	}
-
-	public boolean collides(AABB aBox, AABB bBox) {
-
-		if(Math.abs(aBox.pos.x - bBox.pos.x) < aBox.w + bBox.w) {
-			if(Math.abs(aBox.pos.y - bBox.pos.y) < aBox.h + bBox.h) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-
+    public boolean collides(AABB bBox) {
+        
+        float ax = (pos.x + (w / 2));
+        float ay = (pos.y + (h / 2));
+        float bx = (bBox.pos.x + (w / 2));
+        float by = (bBox.pos.y + (h / 2));
+        
+        if(Math.abs(ax - bx) < (this.w / 2) + (bBox.w / 2)) {
+            if(Math.abs(ay - by) < (this.h / 2) + (bBox.h / 2)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean collisionTile(float ax, float ay, TileManager tm) {
+        
+        for(int c = 0; c < 4; c++) {
+            //int xt = (int) ((pos.x + ax) + c % 16 * 8 + 4) / 16;
+            //int yt = (int) ((pos.y + ay) + c % 16 * 8 + 4) / 16;
+            int xt = (int) ((pos.x + ax) + 16) / 16;
+            int yt = (int) ((pos.y + ay) + 16) / 16;
+            
+            //System.out.println("PLAYER: " + xt + "," + yt);
+            
+            for(int i = 0; i < tm.getSheetCount(); i++) {
+                if(tm.getTileSheet(i).getView() == 0) {
+                    if(tm.getTileSheet(i).getBlock(xt, yt)) {
+                        System.out.println("PLAYER: " + xt + "," + yt);
+                        System.out.println("Something is there");
+                        return true;
+                    }
+                }
+                
+            }
+            
+        }
+        
+        return false;
+    }
 }
