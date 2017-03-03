@@ -15,35 +15,51 @@ public class TileManager {
 	private final int BACK = 2;
 
 	public TileManager() {
-		ts = new TileSheet[6];
+            ts = new TileSheet[6];
 	}
-
+        
+        public int getSheetCount() { return sheetCount; }
+        public TileSheet getTileSheet(int i) {return ts[i]; }
+        
 	public void addBlock(int id, int x, int y, int tileSheet) {
-		if(tileSheet > sheetCount) {
-			System.out.println("That tile sheet does not exist");
-		} else {
-			ts[tileSheet].addBlock(id, x, y);
-		}
+            if(tileSheet > sheetCount) {
+                    System.out.println("That tile sheet does not exist");
+            } else {
+                    ts[tileSheet].addBlock(id, x, y);
+            }
 	}
 
 	public void addTileSheet(TileSheet ts) {
-		if(sheetCount <= 6) {
-			this.ts[sheetCount++] = ts;
-			this.ts[sheetCount - 1].setView(BACK);
-		}
-		else
-			System.out.println("You have exceed the max amount of tile sheets");
+            if(sheetCount <= 6) {
+                this.ts[sheetCount++] = ts;
+                this.ts[sheetCount - 1].setView(BACK);
+            }
+            else
+                System.out.println("You have exceed the max amount of tile sheets");
 	}
+        
+        public void removeTileSheet(int index) {
+            if(index <= 6) {
+                for(int i = index + 1; i < sheetCount; i++) {
+                    ts[i - 1] = ts[i];
+                }
+                //ts[index] = null;
+                sheetCount--;
+            } else {
+                System.out.println("Sadly, no such tile sheet");
+            }
+        
+        }
 
 	public void setView(int view, int tileSheet) {
-		if(tileSheet > sheetCount) {
-			System.out.println("That tile sheet does not exist");
-		}
-		else if (view > 3) {
-			System.out.println("No such layer");
-		} else {
-			ts[tileSheet].setView(view);
-		}
+            if(tileSheet > sheetCount) {
+                System.out.println("That tile sheet does not exist");
+            }
+            else if (view > 3) {
+                System.out.println("No such layer");
+            } else {
+                ts[tileSheet].setView(view);
+            }
 	}
 
 	public void update() {
@@ -51,24 +67,24 @@ public class TileManager {
 	}
 
 	public void renderObj(Graphics2D g) {
-		for(int i = 0; i < sheetCount; i++) {
-			if(ts[i].getView() == OBJ)
-				ts[i].render(g);
-		}
+            for(int i = 0; i < sheetCount; i++) {
+                if(ts[i].getView() == OBJ)
+                    ts[i].render(g);
+            }
 	}
 
 	public void renderFore(Graphics2D g) {
-		for(int i = 0; i < sheetCount; i++) {
-			if(ts[i].getView() == FORE)
-				ts[i].render(g);
-		}
+            for(int i = 0; i < sheetCount; i++) {
+                if(ts[i].getView() == FORE)
+                    ts[i].render(g);
+            }
 	}
 
 	public void renderBack(Graphics2D g) {
-		for(int i = 0; i < sheetCount; i++) {
-			if(ts[i].getView() == BACK)
-				ts[i].render(g);
-		}
+            for(int i = 0; i < sheetCount; i++) {
+                if(ts[i].getView() == BACK)
+                    ts[i].render(g);
+            }
 	}
 
 }
