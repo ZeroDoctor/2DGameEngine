@@ -2,7 +2,6 @@ package com.zerulus.graphics;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.File;
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
@@ -108,5 +107,4 @@ public class Sprite {
             y += yOffset;
         }
     }
-
 }

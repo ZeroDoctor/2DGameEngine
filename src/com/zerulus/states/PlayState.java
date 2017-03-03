@@ -1,8 +1,6 @@
 package com.zerulus.states;
 
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 import com.zerulus.entity.Player;
 import com.zerulus.entity.Entity;
@@ -26,7 +24,9 @@ public class PlayState  {
     private Entity p;
     private Sprite playerSprite;
     private Vector2f playerPos;
-
+    
+    private Font f;
+    
     private TileManager tm;
 
     private TestBlock tb;
@@ -35,35 +35,40 @@ public class PlayState  {
 
         map = new Vector2f();
         Vector2f.setWorldVar(map.x, map.y);
+        
+        tm = new TileManager();
+        tm.addTileSheet(new TileSheet("\\res\\tiles\\dungeon_tiles_formatted.png", 16, 16));
+        tm.setView(0, 0);
 
         playerSprite = new Sprite("\\res\\entity\\linkFormatted.png");
         playerPos = new Vector2f(200, 200);
         p = new Player(playerSprite, playerPos);
-
-        tm = new TileManager();
-        tm.addTileSheet(new TileSheet("\\res\\tiles\\dungeon_tiles_formatted.png", 16, 16));
-        tm.setView(2, 0);
+        p.setTileManager(tm);
 
         tb = new TestBlock(tm);
     }
 
     public void update() {
-        p.update();
+        if(p != null)
+            p.update();
     }
 
     public void render(Graphics2D g) {
         tm.renderBack(g);
         tm.renderFore(g);
         tm.renderObj(g);
-        p.render(g);
+        
+        if(p != null)
+            p.render(g);
 
     }
 
     //place input in Player class ?
     public void input(InputHandler keys, MouseHandler mouse) {
-
         tb.input(keys, mouse);
-        p.input(keys, mouse);
+        
+        if(p != null)
+            p.input(keys, mouse);
     }
 
 }

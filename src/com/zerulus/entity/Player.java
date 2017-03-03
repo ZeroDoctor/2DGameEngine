@@ -62,83 +62,9 @@ public class Player extends Entity {
         }
     }
 
-    private void move() {
-        if(up) {
-			dy -= acc;
-			if(dy < -maxSpeed) {
-				dy = -maxSpeed;
-			}
-		} else {
-			if(dy < 0) {
-				dy += deacc;
-				if(dy > 0) {
-					dy = 0;
-				}
-			}
-		}
-		if (down) {
-			dy += acc;
-			if(dy > maxSpeed) {
-				dy = maxSpeed;
-			}
-		} else {
-			if(dy > 0) {
-				dy -= deacc;
-				if(dy < 0) {
-					dy = 0;
-				}
-			}
-		}
-		if(left) {
-			dx -= acc;
-			if(dx < -maxSpeed) {
-				dx = -maxSpeed;
-			}
-		} else {
-			if(dx < 0) {
-				dx += deacc;
-				if(dx > 0) {
-					dx = 0;
-				}
-			}
-		}
-		if(right) {
-			dx += acc;
-			if(dx > maxSpeed) {
-				dx = maxSpeed;
-			}
-		} else {
-			if(dx > 0) {
-				dx -= deacc;
-				if(dx < 0) {
-					dx = 0;
-				}
-			}
-		}
-    }
-
-    public boolean collision(float ax, float ay) {
-        boolean solid = false;
-        for(int c = 0; c < 4; c++) {
-            //int xt = ((pos.x + ax) + c % 2 * 2 - 1) / 16;
-            //int yt = ((pos.y + ay) + c / 2 * 2 - 1) / 16;
-            //if same position as block return true;
-            //level.getTile(xt, yt).solid()) solid = true;
-        }
-        return solid;
-    }
-
     public void update() {
         anim();
-        move();
-
-        if(!collision(0, dy)) {
-            pos.y += dy;
-        }
-        if(!collision(dx, 0)) {
-            pos.x += dx;
-        }
-
+        super.update();
         ani.update();
     }
 

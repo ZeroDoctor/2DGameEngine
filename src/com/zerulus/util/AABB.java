@@ -37,6 +37,9 @@ public class AABB {
         return false;
     }
     
+    //int xt = ((pos.x + ax) + c % 2 * 2 - 1) / 16;
+    //int yt = ((pos.y + ay) + c / 2 * 2 - 1) / 16;
+    
     public boolean collisionTile(float ax, float ay, TileManager tm) {
         
         for(int c = 0; c < 4; c++) {

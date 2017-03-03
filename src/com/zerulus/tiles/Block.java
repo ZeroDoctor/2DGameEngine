@@ -14,7 +14,7 @@ public class Block {
 	public Block(int id, Vector2f pos, TileSheet ts) {
 		this.pos = pos;
                 //this line LOL
-                img = ts.getTileSheet().getSprite(id / ts.getTileSheet().getWidth(), id % ts.getTileSheet().getWidth());
+                img = ts.getTileSprite().getSprite(id / ts.getTileSprite().getWidth(), id % ts.getTileSprite().getWidth());
 	}
 
 	public void update() {
