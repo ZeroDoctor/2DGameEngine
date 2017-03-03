@@ -45,8 +45,8 @@ public class AABB {
         for(int c = 0; c < 4; c++) {
             //int xt = (int) ((pos.x + ax) + c % 16 * 8 + 4) / 16;
             //int yt = (int) ((pos.y + ay) + c % 16 * 8 + 4) / 16;
-            int xt = (int) ((pos.x + ax) + 16) / 16;
-            int yt = (int) ((pos.y + ay) + 16) / 16;
+            int xt = (int) ((pos.x + ax) / c + 16) / 16;
+            int yt = (int) ((pos.y + ay) / c + 16) / 16;
             
             //System.out.println("PLAYER: " + xt + "," + yt);
             
