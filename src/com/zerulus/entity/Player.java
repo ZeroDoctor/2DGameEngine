@@ -12,10 +12,6 @@ import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
 
-
-    private int xImage = 0;
-    private int yImage = 0;
-
     private Animation ani;
 
     private final int RIGHT = 0;
