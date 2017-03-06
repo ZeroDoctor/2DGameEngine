@@ -87,7 +87,7 @@ public class InputHandler implements KeyListener {
 
         if(e.getKeyCode() == KeyEvent.VK_SPACE) attack.toggle(pressed);
 
-        if(e.getKeyCode() == KeyEvent.VK_TAB) menu.toggle(pressed);
+        if(e.getKeyCode() == KeyEvent.VK_B) menu.toggle(pressed);
 
         if(e.getKeyCode() == KeyEvent.VK_T) edit.toggle(pressed);
 

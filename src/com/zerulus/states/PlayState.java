@@ -21,7 +21,7 @@ public class PlayState  {
 
     private Vector2f map;
 
-    private Entity p;
+    private Player p;
     private Sprite playerSprite;
     private Vector2f playerPos;
     
@@ -66,6 +66,10 @@ public class PlayState  {
     //place input in Player class ?
     public void input(InputHandler keys, MouseHandler mouse) {
         tb.input(keys, mouse);
+        
+        if(keys.menu.down) {
+            System.out.println(p.getPos());
+        } 
         
         if(p != null)
             p.input(keys, mouse);

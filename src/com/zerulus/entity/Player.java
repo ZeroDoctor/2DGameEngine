@@ -26,6 +26,8 @@ public class Player extends Entity {
         ani = new Animation();
         setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 10);
     }
+    
+    public Vector2f getPos() { return pos; }
 
     private void setAnimation(int i, BufferedImage[] b, int d) {
         currentAnimation = i;

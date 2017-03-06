@@ -42,11 +42,11 @@ public class AABB {
     
     public boolean collisionTile(float ax, float ay, TileManager tm) {
         
-        for(int c = 0; c < 4; c++) {
+        for(int c = 0; c < 8; c++) {
             //int xt = (int) ((pos.x + ax) + c % 16 * 8 + 4) / 16;
             //int yt = (int) ((pos.y + ay) + c % 16 * 8 + 4) / 16;
-            int xt = (int) ((pos.x + ax) / c + 16) / 16;
-            int yt = (int) ((pos.y + ay) / c + 16) / 16;
+            int xt = (int) ((pos.x + ax) + (c % 4) * 2 - 1) / 16;
+            int yt = (int) ((pos.y + ay) + (c / 4) * 2 - 1) / 16;
             
             //System.out.println("PLAYER: " + xt + "," + yt);
             

@@ -22,8 +22,8 @@ public abstract class Entity {
     protected float dy;
     protected int size;
 
-    protected float maxSpeed = 2f;
-    protected float acc = 1f;
+    protected float maxSpeed = 1f;
+    protected float acc = 0.4f;
     protected float deacc = 0.1f;
 
     protected AABB bounds;
