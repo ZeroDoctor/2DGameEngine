@@ -46,6 +46,9 @@ public class PlayState  {
         p.setTileManager(tm);
 
         tb = new TestBlock(tm);
+        
+        
+        tm.addBlock(0, 6 * 16, 3 * 16, 0);
     }
 
     public void update() {
@@ -66,10 +69,6 @@ public class PlayState  {
     //place input in Player class ?
     public void input(InputHandler keys, MouseHandler mouse) {
         tb.input(keys, mouse);
-        
-        if(keys.menu.down) {
-            System.out.println(p.getPos());
-        } 
         
         if(p != null)
             p.input(keys, mouse);

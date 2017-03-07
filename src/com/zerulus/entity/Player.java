@@ -6,6 +6,7 @@ import com.zerulus.util.AABB;
 import com.zerulus.util.Vector2f;
 import com.zerulus.util.InputHandler;
 import com.zerulus.util.MouseHandler;
+import java.awt.Color;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -67,10 +68,20 @@ public class Player extends Entity {
     }
 
     public void render(Graphics2D g) {
+        g.setColor(Color.red);
+        g.drawRect((int) pos.x, (int) pos.y, size / 2, size / 2);
+        g.drawRect((int) pos.x + size / 2, (int) pos.y, size / 2, size / 2);
+        g.drawRect((int) pos.x, (int) pos.y + size / 2, size / 2, size / 2);
+        g.drawRect((int) pos.x + size / 2, (int) pos.y + size / 2, size / 2, size / 2);
         g.drawImage(ani.getImage(), (int) pos.x, (int) pos.y, size, size, null);
     }
 
     public void input(InputHandler keys, MouseHandler mouse) {
+        if(keys.menu.clicked) {
+            System.out.println(this.getPos());
+            System.out.println(bounds.xt + ", " + bounds.yt);
+        } 
+        
         if(keys.up.down) {
             up = true;
         } else {
