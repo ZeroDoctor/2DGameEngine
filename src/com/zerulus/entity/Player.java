@@ -1,15 +1,15 @@
 package com.zerulus.entity;
 
-import com.zerulus.graphics.Animation;
-import com.zerulus.graphics.Sprite;
-import com.zerulus.util.AABB;
-import com.zerulus.util.Vector2f;
-import com.zerulus.util.InputHandler;
-import com.zerulus.util.MouseHandler;
 import java.awt.Color;
-
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+
+import com.zerulus.graphics.Animation;
+import com.zerulus.graphics.Sprite;
+import com.zerulus.tiles.TileManager;
+import com.zerulus.util.InputHandler;
+import com.zerulus.util.MouseHandler;
+import com.zerulus.util.Vector2f;
 
 public class Player extends Entity {
 
@@ -21,8 +21,8 @@ public class Player extends Entity {
     private final int UP = 3;
     private int currentAnimation;
 
-    public Player(Sprite sprite, Vector2f pos) {
-        super(sprite, pos);
+    public Player(Sprite sprite, Vector2f pos, TileManager tm) {
+        super(sprite, pos, tm);
 
         ani = new Animation();
         setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 10);
@@ -68,20 +68,33 @@ public class Player extends Entity {
     }
 
     public void render(Graphics2D g) {
-        g.setColor(Color.red);
+    	
+    	
+        g.setColor(Color.blue);
         g.drawRect((int) pos.x, (int) pos.y, size / 2, size / 2);
         g.drawRect((int) pos.x + size / 2, (int) pos.y, size / 2, size / 2);
         g.drawRect((int) pos.x, (int) pos.y + size / 2, size / 2, size / 2);
         g.drawRect((int) pos.x + size / 2, (int) pos.y + size / 2, size / 2, size / 2);
+        
+        g.setColor(Color.green);
+        g.drawRect((int) (pos.x + bounds.getXOffset()), (int) (pos.y + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
+        
         g.drawImage(ani.getImage(), (int) pos.x, (int) pos.y, size, size, null);
     }
 
     public void input(InputHandler keys, MouseHandler mouse) {
-        if(keys.menu.clicked) {
-            System.out.println(this.getPos());
-            System.out.println(bounds.xt + ", " + bounds.yt);
-        } 
-        
+    	// For test purposes
+    	if(keys.event.clicked) {
+    		bounds.setXOffset(3);
+    		bounds.setYOffset(14);
+    		bounds.setWidth(25);
+    		bounds.setHeight(16);
+    	}
+    	
+    	if(keys.menu.clicked) {
+    		System.out.println(pos.x + ", " + pos.y);
+    	}
+    	
         if(keys.up.down) {
             up = true;
         } else {

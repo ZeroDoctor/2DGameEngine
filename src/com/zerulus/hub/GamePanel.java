@@ -12,8 +12,9 @@ import com.zerulus.util.MouseHandler;
 import com.zerulus.states.PlayState;
 
 public class GamePanel extends JPanel implements Runnable {
-
-    private Thread thread;
+	private static final long serialVersionUID = 1L;
+	
+	private Thread thread;
     private Graphics2D g;
     private BufferedImage img;
     private boolean running;
@@ -26,8 +27,8 @@ public class GamePanel extends JPanel implements Runnable {
     private PlayState ps;
 
     public GamePanel(int width, int height) {
-        this.width = width;
-        this.height = height;
+        GamePanel.width = width;
+        GamePanel.height = height;
 
         setPreferredSize(new Dimension(width, height));
         setFocusable(true);

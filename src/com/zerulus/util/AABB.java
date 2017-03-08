@@ -1,26 +1,59 @@
 package com.zerulus.util;
 
 import com.zerulus.tiles.TileManager;
+import com.zerulus.tiles.TileMap;
 
 //Sort of
 public class AABB {
 
     private Vector2f pos;
+    private float xOffset = 0;
+    private float yOffset = 0;
     private float w;
     private float h;
+    private int size;
 
     public AABB(Vector2f pos, int w, int h) {
-        //places x and y at the center
         this.pos = pos;
         this.w = w;
         this.h = h;
+        
+        size = Math.max(w, h);
     }
 
     public void setBox(Vector2f pos, int w, int h) {
         this.pos = pos;
         this.w = w;
         this.h = h;
+        
+        size = Math.max(w, h);
     }
+    
+    public float getWidth() { return w; }
+    public float getHeight() { return h; }
+    public float getXOffset() { return xOffset; }
+    public float getYOffset() { return yOffset; }
+    
+    public void setWidth(float f) {
+    	if(f < TileManager.minBlockSize) {
+    		System.out.println("width cannot be smaller than the smallest tile width");
+    		w = TileManager.minBlockSize;
+    	} else {
+    		w = f;
+    	}	
+    	
+    }
+    public void setHeight(float f) { 
+    	if(f < TileManager.minBlockSize) {
+    		System.out.println("height cannot be smaller than the smallest tile height");
+    		h = TileManager.minBlockSize;
+    	} else {
+    		h = f;
+    	}	
+    	
+    }
+    public void setXOffset(float f) { xOffset = f; }
+    public void setYOffset(float f) { yOffset = f; }
 
     public boolean collides(AABB bBox) {
         
@@ -34,70 +67,46 @@ public class AABB {
                 return true;
             }
         }
+        
         return false;
     }
     
-    //int xt = ((pos.x + ax) + c % 2 * 2 - 1) / 16;
-    //int yt = ((pos.y + ay) + c / 2 * 2 - 1) / 16;
-    
-    public int xt = 0;
-    public int yt = 0;
-    
-    public boolean collisionTile(float ax, float ay, TileManager tm) {
-    	// 32 is the size of player and 16 is the size of the tile
-    	// All of this is just for testing
-        for(int h = 0; h < (32/16) + 2; h++) {
+    /* TODO: Improve collision design
+     * currently collision is detected by corner collision.
+     * So, that means creating boxes that accounts for an entity
+     * being larger than the tiles.
+     * 
+     * For example, entity A = 32px and tiles = 16px
+     * therefore, entity A needs four collision boxes that are 16 by 16
+     * if entity A = 64px, then
+     * 16 collision boxes
+     * 
+     * Therefore, this method becomes a problem really fast.
+     * One solution is using SAT collision detection and storing
+     * the tiles in an array list. However, that means you have to 
+     * loop through the entire list just to check if one block collided 
+     * with an entity. 
+     * */
+    public boolean collisionTile(float ax, float ay, TileManager tm, TileMap ts) {
+    	int boxes = (int) Math.pow((int) (size / TileManager.minBlockSize), 2);
+        for(int b = 0; b < boxes; b++) {
         	for(int c = 0; c < 4; c++) {
-                //int xt = (int) ((pos.x + ax) + c % 16 * 8 + 4) / 16;
-                //int yt = (int) ((pos.y + ay) + c % 16 * 8 + 4) / 16;
-                xt = 0;
-                yt = 0;
-                xt = (int) (( (pos.x + (h % 2) * 16) + ax) + (c % 2) * 10 + 3) / 16;
-                yt = (int) (( (pos.y + ((int)(h / 2)) * 16) + ay) + ((int)(c / 2)) * 0 + 14) / 16;
+        		
+        		//Still need to figure out offsets
+        		// xt: 10 + 3
+        		// yt: 0 + 14
+        		int xt = (int) (( (pos.x + (b % (boxes / 2)) * TileManager.minBlockSize) + ax) + (c % 2) *
+        				(w - TileManager.minBlockSize) + xOffset) / TileManager.minBlockSize;
+        		
+                int yt = (int) (( (pos.y + ((int)(b / (boxes / 2))) * TileManager.minBlockSize) + ay) + ((int)(c / 2)) *
+                		(h - TileManager.minBlockSize) + yOffset) / TileManager.minBlockSize;
                 
-                //System.out.println("PLAYER: " + xt + "," + yt);
-                
-                for(int i = 0; i < tm.getSheetCount(); i++) {
-                    if(tm.getTileSheet(i).getView() == 0) {
-                        if(tm.getTileSheet(i).getBlock(xt, yt)) {
-                            //System.out.println("PLAYER: " + xt + "," + yt);
-                            return true;
-                        }
-                    }
-                    
-                }
-                
+                if(ts.getBlock(xt, yt)) {
+                    return true;
+                }    
             }
         }
-        
         
         return false;
     }
-    
-    /*public boolean collisionTile(float ax, float ay, TileManager tm) {
-        
-        for(int c = 0; c < 9; c++) {
-            //int xt = (int) ((pos.x + ax) + c % 16 * 8 + 4) / 16;
-            //int yt = (int) ((pos.y + ay) + c % 16 * 8 + 4) / 16;
-            xt = 0;
-            yt = 0;
-            xt = (int) ((pos.x + ax) + (c % 3) * 16 - 1) / 16;
-            yt = (int) ((pos.y + ay) + ((int)(c / 3)) * 2 - 4) / 16;
-            
-            //System.out.println("PLAYER: " + xt + "," + yt);
-            
-            for(int i = 0; i < tm.getSheetCount(); i++) {
-                if(tm.getTileSheet(i).getView() == 0) {
-                    if(tm.getTileSheet(i).getBlock(xt, yt)) {
-                        System.out.println("PLAYER: " + xt + "," + yt);
-                        return true;
-                    }
-                }
-                
-            }
-            
-        }
-        
-        return false;
-    }*/
 }

@@ -59,6 +59,8 @@ public class InputHandler implements KeyListener {
     public Key nine = new Key();
 
     public Key edit = new Key();
+    
+    public Key event = new Key();
 
     public void releaseAll() {
         for(int i = 0; i < keys.size(); i++) {
@@ -90,6 +92,7 @@ public class InputHandler implements KeyListener {
         if(e.getKeyCode() == KeyEvent.VK_B) menu.toggle(pressed);
 
         if(e.getKeyCode() == KeyEvent.VK_T) edit.toggle(pressed);
+        if(e.getKeyCode() == KeyEvent.VK_E) event.toggle(pressed);
 
         if(e.getKeyCode() == KeyEvent.VK_0) zero.toggle(pressed);
         if(e.getKeyCode() == KeyEvent.VK_1) one.toggle(pressed);

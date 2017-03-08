@@ -23,25 +23,29 @@ public abstract class Entity {
     protected int size;
 
     protected float maxSpeed = 1f;
-    protected float acc = 0.4f;
+    protected float acc = 0.3f;
     protected float deacc = 0.1f;
 
     protected AABB bounds;
     
     private TileManager tm;
 
-    public Entity(Sprite sprite, Vector2f orgin) {
+    public Entity(Sprite sprite, Vector2f orgin, TileManager tm) {
         this.sprite = sprite;
         pos = orgin;
         size = Math.max(sprite.w, sprite.h);
         bounds = new AABB(orgin, size, size);
+        this.tm = tm;
+        
+        // Just in case user has not made a TileMap
+        if(tm.getTileMapSize() == 0) {
+        	TileManager.minBlockSize = size;
+        }
     }
 
     public void setSprite(Sprite sprite) {
         this.sprite = sprite;
     }
-    
-    public void setTileManager(TileManager tm) { this.tm = tm; }
 
     public void setSize(int i) { size = i; }
     public void setMaxSpeed(float i) { maxSpeed = i; }
@@ -109,13 +113,18 @@ public abstract class Entity {
     public void update() {
         move();
 
-        if(!bounds.collisionTile(0, dy, tm)) {
-            pos.y += dy;
-        }
-        if(!bounds.collisionTile(dx, 0, tm)) {
-            pos.x += dx;
+        for(int i = 0; i < tm.getSheetCount(); i++) {
+        	if(tm.getTileMap(i).getView() == 0) {
+        		if(!bounds.collisionTile(0, dy, tm, tm.getTileMap(i))) {
+                    pos.y += dy;
+                }
+                if(!bounds.collisionTile(dx, 0, tm, tm.getTileMap(i))) {
+                    pos.x += dx;
+                }
+        	}
         }
     }
+    
     public abstract void render(Graphics2D g);
     public void input(InputHandler keys, MouseHandler mouse){}
 }

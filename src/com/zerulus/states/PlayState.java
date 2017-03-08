@@ -6,7 +6,7 @@ import com.zerulus.entity.Player;
 import com.zerulus.entity.Entity;
 import com.zerulus.graphics.Sprite;
 import com.zerulus.graphics.Font;
-import com.zerulus.tiles.TileSheet;
+import com.zerulus.tiles.TileMap;
 import com.zerulus.tiles.TileManager;
 import com.zerulus.util.InputHandler;
 import com.zerulus.util.MouseHandler;
@@ -37,13 +37,14 @@ public class PlayState  {
         Vector2f.setWorldVar(map.x, map.y);
         
         tm = new TileManager();
-        tm.addTileSheet(new TileSheet("\\res\\tiles\\dungeon_tiles_formatted.png", 16, 16));
+        
+        tm.addTileMap(new TileMap("\\res\\tiles\\dungeon_tiles_formatted.png", 16, 16));
         tm.setView(0, 0);
 
         playerSprite = new Sprite("\\res\\entity\\linkFormatted.png");
         playerPos = new Vector2f(200, 200);
-        p = new Player(playerSprite, playerPos);
-        p.setTileManager(tm);
+        
+        p = new Player(playerSprite, playerPos, tm);
 
         tb = new TestBlock(tm);
         

@@ -3,18 +3,17 @@ package com.zerulus.tiles;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import com.zerulus.graphics.Sprite;
 import com.zerulus.util.Vector2f;
 
 public class Block {
 
 	private Vector2f pos;
-        private BufferedImage img;
+    private BufferedImage img;
 
-	public Block(int id, Vector2f pos, TileSheet ts) {
+	public Block(int id, Vector2f pos, TileMap ts) {
 		this.pos = pos;
-                //this line LOL
-                img = ts.getTileSprite().getSprite(id / ts.getTileSprite().getWidth(), id % ts.getTileSprite().getWidth());
+        //this line LOL
+		img = ts.getTileSprite().getSprite(id / ts.getTileSprite().getWidth(), id % ts.getTileSprite().getWidth());
 	}
 
 	public void update() {
