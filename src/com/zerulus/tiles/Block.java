@@ -8,13 +8,17 @@ import com.zerulus.util.Vector2f;
 public class Block {
 
 	private Vector2f pos;
+	private int id;
     private BufferedImage img;
 
 	public Block(int id, Vector2f pos, TileMap ts) {
 		this.pos = pos;
+		this.id = id;
         //this line LOL
 		img = ts.getTileSprite().getSprite(id / ts.getTileSprite().getWidth(), id % ts.getTileSprite().getWidth());
 	}
+	
+	public int getId() { return id; }
 
 	public void update() {
 

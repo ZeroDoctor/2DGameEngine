@@ -20,6 +20,10 @@ public class Player extends Entity {
     }
     
     public Vector2f getPos() { return pos; }
+    
+    public void hit() {
+    	System.out.println("PLAYER: I've been hit!");
+    }
 
     public void update(ArrayList<Enemy> e) {
         super.update();

@@ -47,17 +47,18 @@ public class PlayState  {
         
         tb = new TestBlock(tm);
         
-        
     }
 
     public void update() {
     	
-    	for(int i = 0; i < e.size(); i++) {
-    		e.get(i).update();
-    	}
-    	
-        if(p != null)
-            p.update(e);
+        if(p != null) {
+        	for(int i = 0; i < e.size(); i++) {
+        		e.get(i).update(p);
+        	}
+        	
+        	p.update(e);
+        }
+           
     }
 
     public void render(Graphics2D g) {

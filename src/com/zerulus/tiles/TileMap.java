@@ -27,7 +27,17 @@ public class TileMap {
     public Sprite getTileSprite() { return sprite; }
 
     public void addBlock(int id, int x, int y) {
-        blocks.put(Integer.toString(x / size) + "," + Integer.toString(y / size), new Block(id, new Vector2f(x, y), this));
+    	if(blocks.containsKey(Integer.toString(x / size) + "," + Integer.toString(y / size))) {
+    		if(blocks.get(Integer.toString(x / size) + "," + Integer.toString(y / size)).getId() != id) {
+    			System.out.println("Removing current block!");
+    			removeBlock(x, y);
+        		blocks.put(Integer.toString(x / size) + "," + Integer.toString(y / size), new Block(id, new Vector2f(x, y), this));
+    		} else {
+    			System.out.println("Why? Its the same block!");
+    		}
+    	} else {
+    		blocks.put(Integer.toString(x / size) + "," + Integer.toString(y / size), new Block(id, new Vector2f(x, y), this));
+    	}
     }
     
     public boolean removeBlock(int x, int y) {
@@ -39,8 +49,8 @@ public class TileMap {
     	return false;
     }
     
-    public boolean getBlock(int x, int y){ 
-        return blocks.containsKey(Integer.toString(x) + "," + Integer.toString(y)); 
+    public boolean getBlock(int x, int y){
+        return blocks.containsKey(Integer.toString(x) + "," + Integer.toString(y));
     }
 
     public void render(Graphics2D g) {

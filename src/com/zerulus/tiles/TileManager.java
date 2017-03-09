@@ -62,7 +62,6 @@ public class TileManager {
 	        for(int i = index + 1; i < sheetCount; i++) {
 	            ts[i - 1] = ts[i];
 	        }
-	        //ts[index] = null;
 	        sheetCount--;
 	    } else {
 	        System.out.println("Sadly, no such tile sheet");
