@@ -29,6 +29,8 @@ public class AABB {
         size = Math.max(w, h);
     }
     
+    public Vector2f getPos() { return pos; }
+    
     public float getWidth() { return w; }
     public float getHeight() { return h; }
     public float getXOffset() { return xOffset; }
@@ -52,6 +54,13 @@ public class AABB {
     	}	
     	
     }
+    
+    public void addX(float f) { pos.x += f; }
+    public void addY(float f) { pos.y += f; }
+    public void setX(float f) { pos.x += f; }
+    public void setY(float f) { pos.y += f; }
+    
+    // the offset are for tile to player collision
     public void setXOffset(float f) { xOffset = f; }
     public void setYOffset(float f) { yOffset = f; }
 

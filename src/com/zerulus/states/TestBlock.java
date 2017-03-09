@@ -78,6 +78,11 @@ public class TestBlock {
             tm.addBlock(tile, (mouse.getX() - (mouse.getX() % 32)) / 2, (mouse.getY() - (mouse.getY() % 32)) / 2, 0);
             notClicked = false;
         }
+        
+        if(mouse.getButton() == 3 && notClicked) {
+        	tm.removeBlock((mouse.getX() - (mouse.getX() % 32)) / 2, (mouse.getY() - (mouse.getY() % 32)) / 2, 0);
+        	notClicked = false;
+        }
 
         if(mouse.getButton() == -1) {
             notClicked = true;

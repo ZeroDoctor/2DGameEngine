@@ -1,13 +1,14 @@
 package com.zerulus.states;
 
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
+import com.zerulus.entity.Enemy;
 import com.zerulus.entity.Player;
-import com.zerulus.entity.Entity;
-import com.zerulus.graphics.Sprite;
 import com.zerulus.graphics.Font;
-import com.zerulus.tiles.TileMap;
+import com.zerulus.graphics.Sprite;
 import com.zerulus.tiles.TileManager;
+import com.zerulus.tiles.TileMap;
 import com.zerulus.util.InputHandler;
 import com.zerulus.util.MouseHandler;
 import com.zerulus.util.Vector2f;
@@ -22,8 +23,7 @@ public class PlayState  {
     private Vector2f map;
 
     private Player p;
-    private Sprite playerSprite;
-    private Vector2f playerPos;
+    private ArrayList<Enemy> e;
     
     private Font f;
     
@@ -40,21 +40,24 @@ public class PlayState  {
         
         tm.addTileMap(new TileMap("\\res\\tiles\\dungeon_tiles_formatted.png", 16, 16));
         tm.setView(0, 0);
-
-        playerSprite = new Sprite("\\res\\entity\\linkFormatted.png");
-        playerPos = new Vector2f(200, 200);
         
-        p = new Player(playerSprite, playerPos, tm);
-
+        p = new Player(new Sprite("\\res\\entity\\linkFormatted.png"), new Vector2f(200, 200), tm);
+        e = new ArrayList<Enemy>();
+        e.add(new Enemy(new Sprite("\\res\\entity\\linkFormatted.png"), new Vector2f(100, 100), tm));
+        
         tb = new TestBlock(tm);
         
         
-        tm.addBlock(0, 6 * 16, 3 * 16, 0);
     }
 
     public void update() {
+    	
+    	for(int i = 0; i < e.size(); i++) {
+    		e.get(i).update();
+    	}
+    	
         if(p != null)
-            p.update();
+            p.update(e);
     }
 
     public void render(Graphics2D g) {
@@ -64,6 +67,10 @@ public class PlayState  {
         
         if(p != null)
             p.render(g);
+        
+        for(int i = 0; i < e.size(); i++) {
+    		e.get(i).render(g);
+    	}
 
     }
 

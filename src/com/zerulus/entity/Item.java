@@ -12,6 +12,7 @@ public class Item extends Entity{
     public Item(Sprite sprite, Vector2f pos, TileManager tm) {
         super(sprite, pos, tm);
     }
+    
 
     public void update() {
 

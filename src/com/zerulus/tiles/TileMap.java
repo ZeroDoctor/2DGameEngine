@@ -30,6 +30,15 @@ public class TileMap {
         blocks.put(Integer.toString(x / size) + "," + Integer.toString(y / size), new Block(id, new Vector2f(x, y), this));
     }
     
+    public boolean removeBlock(int x, int y) {
+    	if(blocks.containsKey(Integer.toString(x / size) + "," + Integer.toString(y / size))) {
+    		blocks.remove(Integer.toString(x / size) + "," + Integer.toString(y / size));
+    		return true;
+    	}
+    	
+    	return false;
+    }
+    
     public boolean getBlock(int x, int y){ 
         return blocks.containsKey(Integer.toString(x) + "," + Integer.toString(y)); 
     }

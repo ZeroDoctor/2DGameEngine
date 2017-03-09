@@ -59,7 +59,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void run() {
         init();
 
-        final double GAME_HERTZ = 120.0;
+        final double GAME_HERTZ = 60.0;
         final double TBU = 1000000000 / GAME_HERTZ;
         //most update before render
         final int MUBR = 5;

@@ -40,6 +40,12 @@ public class TileManager {
 	        ts[tileSheet].addBlock(id, x, y);
 		}
 	}
+	
+	public void removeBlock(int x, int y, int tileSheet) {
+		if(!ts[tileSheet].removeBlock(x, y)) {
+			System.out.println("Nothing there");
+		}
+	}
 
 	public void addTileMap(TileMap ts) {
 		minBlockSize = Math.min(minBlockSize, ts.getSize());
