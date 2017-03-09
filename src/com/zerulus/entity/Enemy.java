@@ -12,6 +12,11 @@ public class Enemy extends Entity{
     public Enemy(Sprite sprite, Vector2f pos, TileManager tm) {
         super(sprite, pos, tm);
         attacking = true;
+        
+/*        bounds.setXOffset(3);
+		bounds.setYOffset(14);
+		bounds.setWidth(25);
+		bounds.setHeight(16);*/
     }
     
     

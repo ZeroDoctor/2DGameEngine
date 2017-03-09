@@ -67,6 +67,7 @@ public class Player extends Entity {
     		bounds.setYOffset(14);
     		bounds.setWidth(25);
     		bounds.setHeight(16);
+    		acc = 0.2f;
     	}
     	
     	if(keys.menu.clicked) {
