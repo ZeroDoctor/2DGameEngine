@@ -21,7 +21,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public static int width;
     public static int height;
-
+    public static int scale = 2;
+    
     private InputHandler keys;
     private MouseHandler mouse;
     private PlayState ps;
@@ -138,7 +139,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void draw() {
         Graphics g2 = (Graphics) this.getGraphics();
-        g2.drawImage(img, 0, 0, width * 2, height * 2, null);
+        g2.drawImage(img, 0, 0, width * GamePanel.scale, height * GamePanel.scale, null);
         g2.dispose();
     }
 

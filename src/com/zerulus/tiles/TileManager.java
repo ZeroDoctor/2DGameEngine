@@ -48,7 +48,7 @@ public class TileManager {
 	}
 
 	public void addTileMap(TileMap ts) {
-		minBlockSize = Math.min(minBlockSize, ts.getSize());
+		minBlockSize = 16;//Math.min(minBlockSize, ts.getSize());
 		if(sheetCount <= 6) {
 		    this.ts[sheetCount++] = ts;
 		    this.ts[sheetCount - 1].setView(BACK);

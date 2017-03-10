@@ -101,14 +101,23 @@ public class AABB {
         for(int b = 0; b < boxes; b++) {
         	for(int c = 0; c < 4; c++) {
         		
-        		//Still need to figure out offsets
-        		// xt: 10 + 3
-        		// yt: 0 + 14
-        		int xt = (int) (( (pos.x + (b % (boxes / 2)) * TileManager.minBlockSize) + ax) + (c % 2) *
-        				(w - TileManager.minBlockSize) + xOffset) / TileManager.minBlockSize;
+        		int xt = 0;
+        		int yt = 0;
         		
-                int yt = (int) (( (pos.y + ((int)(b / (boxes / 2))) * TileManager.minBlockSize) + ay) + ((int)(c / 2)) *
-                		(h - TileManager.minBlockSize) + yOffset) / TileManager.minBlockSize;
+        		if(boxes > 1) {
+        			xt = (int) (( (pos.x + (b % (boxes / 2)) * TileManager.minBlockSize) + ax) + (c % 2) *
+            				(w - TileManager.minBlockSize) + xOffset) / TileManager.minBlockSize;
+            		
+                    yt = (int) (( (pos.y + ((int)(b / (boxes / 2))) * TileManager.minBlockSize) + ay) + ((int)(c / 2)) *
+                    		(h - TileManager.minBlockSize) + yOffset) / TileManager.minBlockSize;
+        		} else {
+        			xt = (int) (( (pos.x + ax) + (c % 2) *
+            				(w) - xOffset)) / TileManager.minBlockSize;
+            		
+                    yt = (int) (( (pos.y + ay) + ((int)(c / 2)) *
+                    		(h) - yOffset)) / TileManager.minBlockSize;
+        		}
+        		
                 
                 if(ts.getBlock(xt, yt)) {
                     return true;

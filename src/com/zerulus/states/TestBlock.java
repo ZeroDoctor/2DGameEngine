@@ -1,5 +1,6 @@
 package com.zerulus.states;
 
+import com.zerulus.hub.GamePanel;
 import com.zerulus.tiles.TileManager;
 import com.zerulus.util.InputHandler;
 import com.zerulus.util.MouseHandler;
@@ -75,12 +76,14 @@ public class TestBlock {
 
         if(mouse.getButton() == 1 && notClicked) {
 
-            tm.addBlock(tile, (mouse.getX() - (mouse.getX() % 32)) / 2, (mouse.getY() - (mouse.getY() % 32)) / 2, 0);
+            tm.addBlock(tile, (mouse.getX() - (mouse.getX() % (GamePanel.scale * 16) )) / GamePanel.scale, 
+            		(mouse.getY() - (mouse.getY() % (GamePanel.scale * 16) )) / GamePanel.scale, 0);
             notClicked = false;
         }
         
         if(mouse.getButton() == 3 && notClicked) {
-        	tm.removeBlock((mouse.getX() - (mouse.getX() % 32)) / 2, (mouse.getY() - (mouse.getY() % 32)) / 2, 0);
+        	tm.removeBlock((mouse.getX() - (mouse.getX() % (GamePanel.scale * 16) )) / GamePanel.scale, 
+            		(mouse.getY() - (mouse.getY() % (GamePanel.scale * 16) )) / GamePanel.scale, 0);
         	notClicked = false;
         }
 

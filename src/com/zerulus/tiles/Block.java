@@ -9,13 +9,16 @@ public class Block {
 
 	private Vector2f pos;
 	private int id;
-    private BufferedImage img;
+	private int size;
+    private BufferedImage img = null;
 
-	public Block(int id, Vector2f pos, TileMap ts) {
+	public Block(int id, int size, Vector2f pos, TileMap ts) {
 		this.pos = pos;
 		this.id = id;
+		this.size = size;
         //this line LOL
-		img = ts.getTileSprite().getSprite(id / ts.getTileSprite().getWidth(), id % ts.getTileSprite().getWidth());
+		if(id != -1)
+			img = ts.getTileSprite().getSprite(id / ts.getTileSprite().getWidth(), id % ts.getTileSprite().getWidth());
 	}
 	
 	public int getId() { return id; }
@@ -25,8 +28,7 @@ public class Block {
 	}
 
 	public void render(Graphics2D g) {
-		// later implement the width and height
-		g.drawImage(img, (int) pos.x, (int) pos.y, null);
+		g.drawImage(img, (int) pos.x, (int) pos.y, size, size, null);
 	}
 
 }
