@@ -26,8 +26,8 @@ public abstract class Entity {
     protected float dy;
     protected int size;
 
-    protected float maxSpeed = 2f;
-    protected float acc = 1f;
+    protected float maxSpeed = 1f;
+    protected float acc = 0.1f;
     protected float deacc = 0.1f;
 
     protected AABB bounds;
@@ -160,10 +160,30 @@ public abstract class Entity {
             setAnimation(currentAnimation, sprite.getSpriteArray(currentAnimation), -1);
         }
     }
+    
+    private void setHitBoxDirection() {
+    	if(up) {
+    		hitBounds.setYOffset(-size / 2);
+    		hitBounds.setXOffset(-size / 2);
+    	}
+    	else if(down) {
+    		hitBounds.setYOffset(size / 2);
+    		hitBounds.setXOffset(-size / 2);
+    	}
+    	else if(left) {
+    		hitBounds.setXOffset(-size);
+    		hitBounds.setYOffset(0);
+    	}
+    	else if(right) {
+    		hitBounds.setYOffset(0);
+    		hitBounds.setXOffset(0);
+    	}
+    }
 
     public void update() {
         animate();
     	move();
+    	setHitBoxDirection();
     	
         for(int i = 0; i < tm.getSheetCount(); i++) {
         	if(tm.getTileMap(i).getView() == 0) {

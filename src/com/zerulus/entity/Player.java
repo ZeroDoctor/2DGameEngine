@@ -54,7 +54,7 @@ public class Player extends Entity {
         
         if(attacking) {
         	g.setColor(Color.red);
-        	g.drawRect((int) hitBounds.getPos().x, (int) hitBounds.getPos().y, (int) hitBounds.getWidth(), (int) hitBounds.getHeight());
+        	g.drawRect((int) (hitBounds.getPos().x + hitBounds.getXOffset()), (int) (hitBounds.getPos().y + hitBounds.getYOffset()), (int) hitBounds.getWidth(), (int) hitBounds.getHeight());
         }
         
         g.drawImage(ani.getImage(), (int) pos.x, (int) pos.y, size, size, null);

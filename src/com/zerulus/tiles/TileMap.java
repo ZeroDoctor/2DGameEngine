@@ -16,7 +16,7 @@ public class TileMap {
     public TileMap(String file, int width, int height) {
         sprite = new Sprite(file, width, height);
         blocks = new HashMap<String, Block>();
-        size = 32;//Math.max(width, height);
+        size = 16;//Math.max(width, height);
     }
     
     public void setView(int view) { this.view = view; }

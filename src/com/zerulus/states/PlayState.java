@@ -7,6 +7,7 @@ import com.zerulus.entity.Enemy;
 import com.zerulus.entity.Player;
 import com.zerulus.graphics.Font;
 import com.zerulus.graphics.Sprite;
+import com.zerulus.hub.GamePanel;
 import com.zerulus.tiles.TileManager;
 import com.zerulus.tiles.TileMap;
 import com.zerulus.util.InputHandler;
@@ -41,9 +42,9 @@ public class PlayState  {
         tm.addTileMap(new TileMap("\\res\\tiles\\dungeon_tiles_formatted.png", 16, 16));
         tm.setView(0, 0);
         
-        p = new Player(new Sprite("\\res\\entity\\linkFormatted.png"), new Vector2f(200, 200), tm);
+        //p = new Player(new Sprite("\\res\\entity\\linkFormatted.png"), new Vector2f(200, 200), tm);
         e = new ArrayList<Enemy>();
-        e.add(new Enemy(new Sprite("\\res\\entity\\linkFormatted.png"), new Vector2f(100, 100), tm));
+        //e.add(new Enemy(new Sprite("\\res\\entity\\linkFormatted.png"), new Vector2f(100, 100), tm));
         
         tb = new TestBlock(tm);
         

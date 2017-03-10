@@ -57,19 +57,18 @@ public class AABB {
     
     public void addX(float f) { pos.x += f; }
     public void addY(float f) { pos.y += f; }
-    public void setX(float f) { pos.x += f; }
-    public void setY(float f) { pos.y += f; }
+    public void setX(float f) { pos.x = f; }
+    public void setY(float f) { pos.y = f; }
     
     // the offset are for tile to player collision
     public void setXOffset(float f) { xOffset = f; }
     public void setYOffset(float f) { yOffset = f; }
 
     public boolean collides(AABB bBox) {
-        
-        float ax = ((pos.x + (xOffset / 2) + 1) + (w / 2));
-        float ay = ((pos.y + (yOffset / 2)) + (h / 2));
-        float bx = ((bBox.pos.x + (bBox.xOffset / 2) - 1) + (w / 2));
-        float by = ((bBox.pos.y + (bBox.yOffset / 2) - 1) + (h / 2));
+        float ax = ((pos.x + (xOffset)) + (w / 2));
+        float ay = ((pos.y + (yOffset)) + (h / 2));
+        float bx = ((bBox.pos.x + (bBox.xOffset)) + (w / 2));
+        float by = ((bBox.pos.y + (bBox.yOffset)) + (h / 2));
         
         if(Math.abs(ax - bx) < (this.w / 2) + (bBox.w / 2)) {
             if(Math.abs(ay - by) < (this.h / 2) + (bBox.h / 2)) {
