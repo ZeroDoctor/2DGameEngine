@@ -3,8 +3,9 @@ package com.zerulus.hub;
 import javax.swing.JFrame;
 
 public class Game extends JFrame {
+	private static final long serialVersionUID = 1L;
 
-    public Game(String title, int width, int height) {
+	public Game(String title, int width, int height) {
         setTitle(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(new GamePanel(width, height));

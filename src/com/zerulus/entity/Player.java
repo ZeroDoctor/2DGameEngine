@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import com.zerulus.graphics.Sprite;
+import com.zerulus.states.PlayState;
 import com.zerulus.tiles.TileManager;
 import com.zerulus.util.InputHandler;
 import com.zerulus.util.MouseHandler;
@@ -12,7 +13,8 @@ import com.zerulus.util.Vector2f;
 
 public class Player extends Entity {
 
-    
+
+	
     public Player(Sprite sprite, Vector2f pos, TileManager tm) {
         super(sprite, pos, tm);
 
@@ -24,10 +26,27 @@ public class Player extends Entity {
     public void hit() {
     	System.out.println("PLAYER: I've been hit!");
     }
+    
+    private void checkTileCollision() {
+    	for(int i = 0; i < tm.getSheetCount(); i++) {
+        	if(tm.getTileMap(i).getView() == 0) {
+        		if(!bounds.collisionTile(0, dy, tm, tm.getTileMap(i))) {
+                    PlayState.map.y += dy;
+        			pos.y += dy;
+                    //hitBounds.addY(dy);
+                }
+                if(!bounds.collisionTile(dx, 0, tm, tm.getTileMap(i))) {
+                    PlayState.map.x += dx;
+                	pos.x += dx;
+                    //hitBounds.addX(dx);
+                }
+        	}
+        }
+    }
 
     public void update(ArrayList<Enemy> e) {
         super.update();
-        
+        checkTileCollision();
         if(attacking) {
         	
         	for(int i = 0; i < e.size(); i++) {
@@ -44,20 +63,20 @@ public class Player extends Entity {
     public void render(Graphics2D g) {
     	
         g.setColor(Color.blue);
-        g.drawRect((int) pos.x, (int) pos.y, size / 2, size / 2);
-        g.drawRect((int) pos.x + size / 2, (int) pos.y, size / 2, size / 2);
-        g.drawRect((int) pos.x, (int) pos.y + size / 2, size / 2, size / 2);
-        g.drawRect((int) pos.x + size / 2, (int) pos.y + size / 2, size / 2, size / 2);
+        g.drawRect((int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size / 2, size / 2);
+        g.drawRect((int) (pos.getWorldVar().x) + size / 2, (int) (pos.getWorldVar().y), size / 2, size / 2);
+        g.drawRect((int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y) + size / 2, size / 2, size / 2);
+        g.drawRect((int) (pos.getWorldVar().x) + size / 2, (int) (pos.getWorldVar().y) + size / 2, size / 2, size / 2);
         
         g.setColor(Color.green);
-        g.drawRect((int) (pos.x + bounds.getXOffset()), (int) (pos.y + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
+        g.drawRect((int) ((pos.getWorldVar().x) + bounds.getXOffset()), (int) ((pos.getWorldVar().y) + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
         
         if(attacking) {
         	g.setColor(Color.red);
         	g.drawRect((int) (hitBounds.getPos().x + hitBounds.getXOffset()), (int) (hitBounds.getPos().y + hitBounds.getYOffset()), (int) hitBounds.getWidth(), (int) hitBounds.getHeight());
         }
         
-        g.drawImage(ani.getImage(), (int) pos.x, (int) pos.y, size, size, null);
+        g.drawImage(ani.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
     }
 
     public void input(InputHandler keys, MouseHandler mouse) {

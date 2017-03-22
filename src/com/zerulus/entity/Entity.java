@@ -26,7 +26,7 @@ public abstract class Entity {
     protected float dy;
     protected int size;
 
-    protected float maxSpeed = 1f;
+    protected float maxSpeed = 2f;
     protected float acc = 0.1f;
     protected float deacc = 0.1f;
 
@@ -40,14 +40,14 @@ public abstract class Entity {
     private int currentAnimation;
     protected Animation ani;
     
-    private TileManager tm;
+    protected TileManager tm;
 
     public Entity(Sprite sprite, Vector2f orgin, TileManager tm) {
         this.sprite = sprite;
         pos = orgin;
         size = Math.max(sprite.w, sprite.h);
         bounds = new AABB(orgin, size, size);
-        hitBounds = new AABB(new Vector2f(orgin.x + (size / 2), orgin.y), size, size);
+        hitBounds = new AABB(new Vector2f(orgin.x - (size / 2), orgin.y), size, size);
         this.tm = tm;
         
         // Just in case user has not made a TileMap
@@ -56,7 +56,7 @@ public abstract class Entity {
         }
         
         ani = new Animation();
-        setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 10);
+        setAnimation(LEFT, sprite.getSpriteArray(LEFT), 10);
     }
 
     public void setSprite(Sprite sprite) {
@@ -185,18 +185,7 @@ public abstract class Entity {
     	move();
     	setHitBoxDirection();
     	
-        for(int i = 0; i < tm.getSheetCount(); i++) {
-        	if(tm.getTileMap(i).getView() == 0) {
-        		if(!bounds.collisionTile(0, dy, tm, tm.getTileMap(i))) {
-                    pos.y += dy;
-                    hitBounds.addY(dy);
-                }
-                if(!bounds.collisionTile(dx, 0, tm, tm.getTileMap(i))) {
-                    pos.x += dx;
-                    hitBounds.addX(dx);
-                }
-        	}
-        }
+        
         
         ani.update();
     }

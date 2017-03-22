@@ -40,6 +40,10 @@ public class Vector2f {
         worldY = y;
     }
     
+    public Vector2f getWorldVar() {
+    	return new Vector2f(x - worldX, y - worldY);
+    }
+    
     @Override
     public String toString() {
         return x + ", " + y;

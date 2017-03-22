@@ -21,7 +21,7 @@ public class PlayState  {
     // 1 - foreground
     // 0 - objects
 
-    private Vector2f map;
+    public static Vector2f map;
 
     private Player p;
     private ArrayList<Enemy> e;
@@ -42,16 +42,16 @@ public class PlayState  {
         tm.addTileMap(new TileMap("\\res\\tiles\\dungeon_tiles_formatted.png", 16, 16));
         tm.setView(0, 0);
         
-        //p = new Player(new Sprite("\\res\\entity\\linkFormatted.png"), new Vector2f(200, 200), tm);
+        p = new Player(new Sprite("\\res\\entity\\linkFormatted.png"), new Vector2f(GamePanel.width / 4 - 32, GamePanel.height / 4 - 32), tm);
         e = new ArrayList<Enemy>();
-        //e.add(new Enemy(new Sprite("\\res\\entity\\linkFormatted.png"), new Vector2f(100, 100), tm));
+        e.add(new Enemy(new Sprite("\\res\\entity\\linkFormatted.png"), new Vector2f(100, 100), tm));
         
         tb = new TestBlock(tm);
         
     }
 
     public void update() {
-    	
+    	Vector2f.setWorldVar(map.x, map.y);
         if(p != null) {
         	for(int i = 0; i < e.size(); i++) {
         		e.get(i).update(p);

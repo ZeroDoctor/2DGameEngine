@@ -4,6 +4,7 @@ import com.zerulus.hub.GamePanel;
 import com.zerulus.tiles.TileManager;
 import com.zerulus.util.InputHandler;
 import com.zerulus.util.MouseHandler;
+import com.zerulus.util.Vector2f;
 
 public class TestBlock {
 
@@ -75,9 +76,13 @@ public class TestBlock {
 
 
         if(mouse.getButton() == 1 && notClicked) {
+        	
+        	int x = (int) (mouse.getX() + Vector2f.worldX);
+        	int y = (int) (mouse.getY() + Vector2f.worldY);
 
-            tm.addBlock(tile, (mouse.getX() - (mouse.getX() % (GamePanel.scale * 16) )) / GamePanel.scale, 
-            		(mouse.getY() - (mouse.getY() % (GamePanel.scale * 16) )) / GamePanel.scale, 0);
+            tm.addBlock(tile, (int) ( ((x - (x % (GamePanel.scale * 16) )) + (Vector2f.worldX - (Vector2f.worldX % (GamePanel.scale * 16))) ) / GamePanel.scale) , 
+            		(int) ( ((y - (y % (GamePanel.scale * 16) )) + (Vector2f.worldY - (Vector2f.worldY % (GamePanel.scale * 16))) ) / GamePanel.scale), 0);
+            
             notClicked = false;
         }
         
