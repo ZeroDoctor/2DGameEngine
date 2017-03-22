@@ -11,10 +11,13 @@ public class MouseHandler implements MouseListener, MouseMotionListener{
     private static int mouseX = -1;
     private static int mouseY = -1;
     private static int mouseB = -1;
-
+    
+    public GamePanel game;
+    
     public MouseHandler(GamePanel game){
         game.addMouseListener(this);
         game.addMouseMotionListener(this);
+        this.game = game;
     }
 
     public int getX() {

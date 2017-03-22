@@ -33,7 +33,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         setPreferredSize(new Dimension(width, height));
         setFocusable(true);
-        requestFocus();
+        requestFocusInWindow();
     }
 
     public void addNotify() {
@@ -52,8 +52,9 @@ public class GamePanel extends JPanel implements Runnable {
 
 
         ps = new PlayState();
-        keys = new InputHandler(this);
+        
         mouse = new MouseHandler(this);
+        keys = new InputHandler(this);
 
     }
 
