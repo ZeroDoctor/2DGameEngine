@@ -17,6 +17,11 @@ public class GUI extends javax.swing.JFrame {
      */
     public GUI() {
         initComponents();
+        addGamePanel();
+    }
+    
+    private void addGamePanel() {
+        jTabbedPane3.addTab("Game.amx", new GamePanel(800,600));
     }
 
     /**
@@ -35,6 +40,8 @@ public class GUI extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jTabbedPane2 = new javax.swing.JTabbedPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTree1 = new javax.swing.JTree();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -46,10 +53,24 @@ public class GUI extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.GridLayout(1, 3));
 
+        jTabbedPane1.setAlignmentX(100.0F);
+        jTabbedPane1.setAlignmentY(100.0F);
+        jTabbedPane1.setMinimumSize(new java.awt.Dimension(100, 100));
         jSplitPane1.setLeftComponent(jTabbedPane1);
+        jTabbedPane1.getAccessibleContext().setAccessibleParent(jSplitPane1);
+
+        jTabbedPane3.setAlignmentX(100.0F);
+        jTabbedPane3.setAlignmentY(100.0F);
+        jTabbedPane3.setMinimumSize(new java.awt.Dimension(100, 100));
+        jTabbedPane3.setPreferredSize(new java.awt.Dimension(800, 600));
         jSplitPane1.setRightComponent(jTabbedPane3);
 
         jSplitPane2.setLeftComponent(jSplitPane1);
+
+        jScrollPane1.setViewportView(jTree1);
+
+        jTabbedPane2.addTab("tab1", jScrollPane1);
+
         jSplitPane2.setRightComponent(jTabbedPane2);
 
         jPanel1.add(jSplitPane2);
@@ -68,11 +89,11 @@ public class GUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
         );
 
         pack();
@@ -119,10 +140,12 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
 }
