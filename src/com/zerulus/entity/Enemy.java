@@ -13,10 +13,10 @@ public class Enemy extends Entity{
         super(sprite, pos, tm);
         attacking = true;
         
-/*        bounds.setXOffset(3);
-		bounds.setYOffset(14);
-		bounds.setWidth(25);
-		bounds.setHeight(16);*/
+        /*bounds.setXOffset(3);
+        bounds.setYOffset(14);
+        bounds.setWidth(25);
+        bounds.setHeight(16);*/
     }
     
     
@@ -27,9 +27,9 @@ public class Enemy extends Entity{
     public void update(Player p) {
     	super.update();
     	if(attacking) {
-    		if(hitBounds.collides(p.getBounds())) {
-        		p.hit();
-        	}
+            if(hitBounds.collides(p.getBounds())) {
+                p.hit();
+            }
     	}
     }
 
@@ -39,8 +39,8 @@ public class Enemy extends Entity{
     	g.drawRect((int) (pos.getWorldVar().x + bounds.getXOffset()), (int) (pos.getWorldVar().y + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
     	
     	if(attacking) {
-    		g.setColor(Color.red);
-        	g.drawRect((int) hitBounds.getPos().x, (int) hitBounds.getPos().y, (int) hitBounds.getWidth(), (int) hitBounds.getHeight());
+            g.setColor(Color.red);
+            g.drawRect((int) hitBounds.getPos().getWorldVar().x, (int) hitBounds.getPos().getWorldVar().y, (int) hitBounds.getWidth(), (int) hitBounds.getHeight());
     	}
     	
     	g.drawImage(ani.getImage(), (int) pos.getWorldVar().x, (int) pos.getWorldVar().y, size, size, null);

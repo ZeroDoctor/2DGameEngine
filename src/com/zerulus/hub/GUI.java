@@ -49,13 +49,17 @@ public class GUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1280, 720));
 
-        jPanel2.setLayout(new java.awt.GridLayout());
+        jPanel2.setLayout(new java.awt.GridLayout(1, 0));
 
-        jPanel1.setLayout(new java.awt.GridLayout(1, 3));
+        jPanel1.setLayout(new java.awt.GridLayout());
+
+        jSplitPane2.setDividerLocation(950);
 
         jTabbedPane1.setAlignmentX(100.0F);
         jTabbedPane1.setAlignmentY(100.0F);
-        jTabbedPane1.setMinimumSize(new java.awt.Dimension(100, 100));
+        jTabbedPane1.setMinimumSize(new java.awt.Dimension(250, 240));
+        jTabbedPane1.setName(""); // NOI18N
+        jTabbedPane1.setRequestFocusEnabled(false);
         jSplitPane1.setLeftComponent(jTabbedPane1);
         jTabbedPane1.getAccessibleContext().setAccessibleParent(jSplitPane1);
 
@@ -66,6 +70,8 @@ public class GUI extends javax.swing.JFrame {
         jSplitPane1.setRightComponent(jTabbedPane3);
 
         jSplitPane2.setLeftComponent(jSplitPane1);
+
+        jTabbedPane2.setPreferredSize(new java.awt.Dimension(25, 389));
 
         jScrollPane1.setViewportView(jTree1);
 

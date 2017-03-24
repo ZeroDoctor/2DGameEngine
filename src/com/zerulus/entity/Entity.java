@@ -47,12 +47,12 @@ public abstract class Entity {
         pos = orgin;
         size = Math.max(sprite.w, sprite.h);
         bounds = new AABB(orgin, size, size);
-        hitBounds = new AABB(new Vector2f(orgin.x - (size / 2), orgin.y), size, size);
+        hitBounds = new AABB(new Vector2f(orgin.x + (size / 2), orgin.y), size, size);
         this.tm = tm;
         
         // Just in case user has not made a TileMap
         if(tm.getTileMapSize() == 0) {
-        	TileManager.minBlockSize = size;
+            TileManager.minBlockSize = size;
         }
         
         ani = new Animation();
@@ -163,20 +163,20 @@ public abstract class Entity {
     
     private void setHitBoxDirection() {
     	if(up) {
-    		hitBounds.setYOffset(-size / 2);
-    		hitBounds.setXOffset(-size / 2);
+            hitBounds.setYOffset(-size / 2);
+            hitBounds.setXOffset(-size / 2);
     	}
     	else if(down) {
-    		hitBounds.setYOffset(size / 2);
-    		hitBounds.setXOffset(-size / 2);
+            hitBounds.setYOffset(size / 2);
+            hitBounds.setXOffset(-size / 2);
     	}
     	else if(left) {
-    		hitBounds.setXOffset(-size);
-    		hitBounds.setYOffset(0);
+            hitBounds.setXOffset(-size);
+            hitBounds.setYOffset(0);
     	}
     	else if(right) {
-    		hitBounds.setYOffset(0);
-    		hitBounds.setXOffset(0);
+            hitBounds.setYOffset(0);
+            hitBounds.setXOffset(0);
     	}
     }
 

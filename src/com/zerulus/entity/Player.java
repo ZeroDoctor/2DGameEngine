@@ -17,8 +17,6 @@ public class Player extends Entity {
 	
     public Player(Sprite sprite, Vector2f pos, TileManager tm) {
         super(sprite, pos, tm);
-
-        
     }
     
     public Vector2f getPos() { return pos; }
@@ -29,18 +27,18 @@ public class Player extends Entity {
     
     private void checkTileCollision() {
     	for(int i = 0; i < tm.getSheetCount(); i++) {
-        	if(tm.getTileMap(i).getView() == 0) {
-        		if(!bounds.collisionTile(0, dy, tm, tm.getTileMap(i))) {
+            if(tm.getTileMap(i).getView() == 0) {
+                if(!bounds.collisionTile(0, dy, tm, tm.getTileMap(i))) {
                     PlayState.map.y += dy;
-        			pos.y += dy;
-                    //hitBounds.addY(dy);
+                    pos.y += dy;
+                    hitBounds.addY(dy);
                 }
                 if(!bounds.collisionTile(dx, 0, tm, tm.getTileMap(i))) {
                     PlayState.map.x += dx;
-                	pos.x += dx;
-                    //hitBounds.addX(dx);
+                    pos.x += dx;
+                    hitBounds.addX(dx);
                 }
-        	}
+            }
         }
     }
 
@@ -49,13 +47,12 @@ public class Player extends Entity {
         checkTileCollision();
         if(attacking) {
         	
-        	for(int i = 0; i < e.size(); i++) {
-        		//System.out.println("Hello");
-        		if(hitBounds.collides(e.get(i).getBounds()) ) {
-        			e.get(i).hit();
-        			
-        		} 
-        	}
+            for(int i = 0; i < e.size(); i++) {
+                //System.out.println("Hello");
+                if(hitBounds.collides(e.get(i).getBounds()) ) {
+                    e.get(i).hit();
+                } 
+            }
         }
         
     }
@@ -72,8 +69,8 @@ public class Player extends Entity {
         g.drawRect((int) ((pos.getWorldVar().x) + bounds.getXOffset()), (int) ((pos.getWorldVar().y) + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
         
         if(attacking) {
-        	g.setColor(Color.red);
-        	g.drawRect((int) (hitBounds.getPos().x + hitBounds.getXOffset()), (int) (hitBounds.getPos().y + hitBounds.getYOffset()), (int) hitBounds.getWidth(), (int) hitBounds.getHeight());
+            g.setColor(Color.red);
+            g.drawRect((int) (hitBounds.getPos().getWorldVar().x + hitBounds.getXOffset()), (int) (hitBounds.getPos().getWorldVar().y + hitBounds.getYOffset()), (int) hitBounds.getWidth(), (int) hitBounds.getHeight());
         }
         
         g.drawImage(ani.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
@@ -82,15 +79,16 @@ public class Player extends Entity {
     public void input(InputHandler keys, MouseHandler mouse) {
     	// For test purposes
     	if(keys.event.clicked) {
-    		bounds.setXOffset(3);
-    		bounds.setYOffset(14);
-    		bounds.setWidth(25);
-    		bounds.setHeight(16);
-    		acc = 0.2f;
+            bounds.setXOffset(3);
+            bounds.setYOffset(14);
+            bounds.setWidth(25);
+            bounds.setHeight(16);
+            acc = 0.2f;
     	}
     	
     	if(keys.menu.clicked) {
-    		System.out.println(pos.x + ", " + pos.y);
+            System.out.println("Bounds: " + bounds.getPos().x + ", " + bounds.getPos().y);
+            System.out.println("Player: " + pos.x + ", " + pos.y);
     	}
     	
         if(keys.up.down) {
@@ -115,10 +113,10 @@ public class Player extends Entity {
         }
         
         if(keys.attack.down) {
-        	//System.out.println("Hello");
-        	attacking = true;
+            //System.out.println("Hello");
+            attacking = true;
         } else {
-        	attacking = false;
+            attacking = false;
         }
         
     }

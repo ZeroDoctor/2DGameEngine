@@ -1,6 +1,7 @@
 package com.zerulus.tiles;
 
 import java.awt.Graphics2D;
+import com.zerulus.util.Vector2f;
 
 public class TileManager {
 	
@@ -33,11 +34,11 @@ public class TileManager {
     
    //public void setMinTileSize(int i) { minBlockSize = i; }
         
-	public void addBlock(int id, int x, int y, int tileSheet) {
+	public void addBlock(int id, Vector2f pos, int tileSheet) {
 		if(tileSheet > sheetCount) {
 	        System.out.println("That tile sheet does not exist");
 		} else {
-	        ts[tileSheet].addBlock(id, x, y);
+	        ts[tileSheet].addBlock(id, pos);
 		}
 	}
 	

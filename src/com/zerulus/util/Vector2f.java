@@ -44,6 +44,10 @@ public class Vector2f {
     	return new Vector2f(x - worldX, y - worldY);
     }
     
+    public Vector2f getTileWorldVar() {
+        return new Vector2f(x + worldX, y + worldY);
+    }
+    
     @Override
     public String toString() {
         return x + ", " + y;

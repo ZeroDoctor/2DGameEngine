@@ -38,19 +38,19 @@ public class AABB {
     
     public void setWidth(float f) {
     	if(f < TileManager.minBlockSize) {
-    		System.out.println("width cannot be smaller than the smallest tile width");
-    		w = TileManager.minBlockSize;
+            System.out.println("width cannot be smaller than the smallest tile width");
+            w = TileManager.minBlockSize;
     	} else {
-    		w = f;
+            w = f;
     	}	
     	
     }
     public void setHeight(float f) { 
     	if(f < TileManager.minBlockSize) {
-    		System.out.println("height cannot be smaller than the smallest tile height");
-    		h = TileManager.minBlockSize;
+            System.out.println("height cannot be smaller than the smallest tile height");
+            h = TileManager.minBlockSize;
     	} else {
-    		h = f;
+            h = f;
     	}	
     	
     }
@@ -65,10 +65,10 @@ public class AABB {
     public void setYOffset(float f) { yOffset = f; }
 
     public boolean collides(AABB bBox) {
-        float ax = ((pos.x + (xOffset) + 1) + (w / 2));
-        float ay = ((pos.y + (yOffset) + 1) + (h / 2));
-        float bx = ((bBox.pos.x + (bBox.xOffset / 2) - 1) + (w / 2));
-        float by = ((bBox.pos.y + (bBox.yOffset / 2) - 1) + (h / 2));
+        float ax = ((pos.getWorldVar().x + (xOffset) + 1) + (w / 2));
+        float ay = ((pos.getWorldVar().y + (yOffset) + 1) + (h / 2));
+        float bx = ((bBox.pos.getWorldVar().x + (bBox.xOffset / 2) - 1) + (w / 2));
+        float by = ((bBox.pos.getWorldVar().y + (bBox.yOffset / 2) - 1) + (h / 2));
         
         if(Math.abs(ax - bx) < (this.w / 2) + (bBox.w / 2)) {
             if(Math.abs(ay - by) < (this.h / 2) + (bBox.h / 2)) {
@@ -98,25 +98,24 @@ public class AABB {
     public boolean collisionTile(float ax, float ay, TileManager tm, TileMap ts) {
     	int boxes = (int) Math.pow((int) (size / TileManager.minBlockSize), 2);
         for(int b = 0; b < boxes; b++) {
-        	for(int c = 0; c < 4; c++) {
+            for(int c = 0; c < 4; c++) {
         		
-        		int xt = 0;
-        		int yt = 0;
+                int xt = 0;
+                int yt = 0;
         		
-        		if(boxes > 1) {
-        			xt = (int) (( (pos.x + (b % (boxes / 2)) * TileManager.minBlockSize) + ax) + (c % 2) *
-            				(w - TileManager.minBlockSize) + xOffset) / TileManager.minBlockSize;
-            		
+                if(boxes > 1) {
+                    xt = (int) (( (pos.x + (b % (boxes / 2)) * TileManager.minBlockSize) + ax) + (c % 2) *
+                        (w - TileManager.minBlockSize) + xOffset) / TileManager.minBlockSize;
+
                     yt = (int) (( (pos.y + ((int)(b / (boxes / 2))) * TileManager.minBlockSize) + ay) + ((int)(c / 2)) *
-                    		(h - TileManager.minBlockSize) + yOffset) / TileManager.minBlockSize;
-        		} else {
-        			xt = (int) (( (pos.x + ax) + (c % 2) *
-            				(w) - xOffset)) / TileManager.minBlockSize;
-            		
-                    yt = (int) (( (pos.y + ay) + ((int)(c / 2)) *
-                    		(h) - yOffset)) / TileManager.minBlockSize;
-        		}
-        		
+                        (h - TileManager.minBlockSize) + yOffset) / TileManager.minBlockSize;
+                } else {
+                    xt = (int) (( (pos.getWorldVar().x + ax) + (c % 2) *
+                        (w) - xOffset)) / TileManager.minBlockSize;
+
+                     yt = (int) (( (pos.getWorldVar().y + ay) + ((int)(c / 2)) *
+                        (h) - yOffset)) / TileManager.minBlockSize;
+                }
                 
                 if(ts.getBlock(xt, yt)) {
                     return true;

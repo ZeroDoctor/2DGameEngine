@@ -80,8 +80,8 @@ public class TestBlock {
         		int x = (int) (mouse.getX() + Vector2f.worldX);
         		int y = (int) (mouse.getY() + Vector2f.worldY);
         		
-        		tm.addBlock(tile, (int) ( ((x - (x % (GamePanel.scale * 16) )) + (Vector2f.worldX - (Vector2f.worldX % (GamePanel.scale * 16))) ) / GamePanel.scale) , 
-        				(int) ( ((y - (y % (GamePanel.scale * 16) )) + (Vector2f.worldY - (Vector2f.worldY % (GamePanel.scale * 16))) ) / GamePanel.scale), 0);
+        		tm.addBlock(tile, new Vector2f((int) ( ((x - (x % (GamePanel.scale * 16) )) + (Vector2f.worldX - (Vector2f.worldX % (GamePanel.scale * 16))) ) / GamePanel.scale) , 
+        				(int) ( ((y - (y % (GamePanel.scale * 16) )) + (Vector2f.worldY - (Vector2f.worldY % (GamePanel.scale * 16))) ) / GamePanel.scale)), 0);
         		
         	} else {
         		mouse.game.requestFocusInWindow();
@@ -92,8 +92,8 @@ public class TestBlock {
         }
         
         if(mouse.getButton() == 3 && notClicked) {
-        	tm.removeBlock((mouse.getX() - (mouse.getX() % (GamePanel.scale * 16) )) / GamePanel.scale, 
-            		(mouse.getY() - (mouse.getY() % (GamePanel.scale * 16) )) / GamePanel.scale, 0);
+        	/*tm.removeBlock((mouse.getX() - (mouse.getX() % (GamePanel.scale * 16) )) / GamePanel.scale, 
+            		(mouse.getY() - (mouse.getY() % (GamePanel.scale * 16) )) / GamePanel.scale, 0);*/
         	notClicked = false;
         }
 
