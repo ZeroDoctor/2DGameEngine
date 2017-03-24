@@ -40,7 +40,8 @@ public class PlayState  {
         tm = new TileManager();
         
         tm.addTileMap(new TileMap("tiles/dungeon_tiles_formatted.png", 16, 16));
-        tm.setView(0, 0);
+        
+        tm.setView(2, 0);
         
         p = new Player(new Sprite("entity/linkFormatted.png"), new Vector2f(GamePanel.width / 4 - 32, GamePanel.height / 4 - 32), tm);
         e = new ArrayList<Enemy>();

@@ -96,33 +96,34 @@ public class AABB {
      * with an entity. 
      * */
     public boolean collisionTile(float ax, float ay, TileManager tm, TileMap ts) {
-    	int boxes = (int) Math.pow((int) (size / TileManager.minBlockSize), 2);
-        for(int b = 0; b < boxes; b++) {
-            for(int c = 0; c < 4; c++) {
-        		
-                int xt = 0;
-                int yt = 0;
-        		
-                if(boxes > 1) {
-                    xt = (int) (( (pos.x + (b % (boxes / 2)) * TileManager.minBlockSize) + ax) + (c % 2) *
-                        (w - TileManager.minBlockSize) + xOffset) / TileManager.minBlockSize;
+        if(ts.getView() == 0) {
+            int boxes = (int) Math.pow((int) (size / TileManager.minBlockSize), 2);
+            for(int b = 0; b < boxes; b++) {
+                for(int c = 0; c < 4; c++) {
 
-                    yt = (int) (( (pos.y + ((int)(b / (boxes / 2))) * TileManager.minBlockSize) + ay) + ((int)(c / 2)) *
-                        (h - TileManager.minBlockSize) + yOffset) / TileManager.minBlockSize;
-                } else {
-                    xt = (int) (( (pos.getWorldVar().x + ax) + (c % 2) *
-                        (w) - xOffset)) / TileManager.minBlockSize;
+                    int xt = 0;
+                    int yt = 0;
 
-                     yt = (int) (( (pos.getWorldVar().y + ay) + ((int)(c / 2)) *
-                        (h) - yOffset)) / TileManager.minBlockSize;
+                    if(boxes > 1) {
+                        xt = (int) (( (pos.x + (b % (boxes / 2)) * TileManager.minBlockSize) + ax) + (c % 2) *
+                            (w - TileManager.minBlockSize) + xOffset) / TileManager.minBlockSize;
+
+                        yt = (int) (( (pos.y + ((int)(b / (boxes / 2))) * TileManager.minBlockSize) + ay) + ((int)(c / 2)) *
+                            (h - TileManager.minBlockSize) + yOffset) / TileManager.minBlockSize;
+                    } else {
+                        xt = (int) (( (pos.getWorldVar().x + ax) + (c % 2) *
+                            (w) - xOffset)) / TileManager.minBlockSize;
+
+                         yt = (int) (( (pos.getWorldVar().y + ay) + ((int)(c / 2)) *
+                            (h) - yOffset)) / TileManager.minBlockSize;
+                    }
+
+                    if(ts.getBlock(xt, yt)) {
+                        return true;
+                    }    
                 }
-                
-                if(ts.getBlock(xt, yt)) {
-                    return true;
-                }    
             }
         }
-        
         return false;
     }
 }

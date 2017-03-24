@@ -184,9 +184,6 @@ public abstract class Entity {
         animate();
     	move();
     	setHitBoxDirection();
-    	
-        
-        
         ani.update();
     }
     
