@@ -25,30 +25,30 @@ public class PlayState  {
 
     private Player p;
     private ArrayList<Enemy> e;
-    
+
     private Font f;
-    
+
     private TileManager tm;
 
     private TestBlock tb;
 
     public PlayState() {
 
-        map = new Vector2f();
+        map = new Vector2f(GamePanel.width, GamePanel.height);
         Vector2f.setWorldVar(map.x, map.y);
-        
+
         tm = new TileManager();
-        
+
         tm.addTileMap(new TileMap("tiles/dungeon_tiles_formatted.png", 16, 16));
-        
-        tm.setView(2, 0);
-        
-        p = new Player(new Sprite("entity/linkFormatted.png"), new Vector2f(GamePanel.width / 4 - 32, GamePanel.height / 4 - 32), tm);
+
+        tm.setView(0, 0);
+
+        p = new Player(new Sprite("entity/linkFormatted.png"), new Vector2f(GamePanel.width + (GamePanel.width / 4 - 32), GamePanel.height + (GamePanel.height / 4 - 32)), tm);
         e = new ArrayList<Enemy>();
-        e.add(new Enemy(new Sprite("entity/linkFormatted.png"), new Vector2f(100, 100), tm));
-        
+        e.add(new Enemy(new Sprite("entity/linkFormatted.png"), new Vector2f(0,0), tm));
+
         tb = new TestBlock(tm);
-        
+
     }
 
     public void update() {
@@ -57,20 +57,20 @@ public class PlayState  {
         	for(int i = 0; i < e.size(); i++) {
         		e.get(i).update(p);
         	}
-        	
+
         	p.update(e);
         }
-           
+
     }
 
     public void render(Graphics2D g) {
         tm.renderBack(g);
         tm.renderFore(g);
         tm.renderObj(g);
-        
+
         if(p != null)
             p.render(g);
-        
+
         for(int i = 0; i < e.size(); i++) {
     		e.get(i).render(g);
     	}
@@ -80,7 +80,7 @@ public class PlayState  {
     //place input in Player class ?
     public void input(InputHandler keys, MouseHandler mouse) {
         tb.input(keys, mouse);
-        
+
         if(p != null)
             p.input(keys, mouse);
     }

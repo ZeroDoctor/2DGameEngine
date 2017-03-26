@@ -3,6 +3,7 @@ package com.zerulus.tiles;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import com.zerulus.hub.GamePanel;
 import com.zerulus.util.Vector2f;
 
 public class Block {
@@ -11,6 +12,8 @@ public class Block {
     private int id;
     private int size;
     private BufferedImage img = null;
+
+    private boolean once = true;
 
     public Block(int id, int size, Vector2f pos, TileMap ts) {
         this.pos = pos;
@@ -28,6 +31,11 @@ public class Block {
     }
 
     public void render(Graphics2D g) {
+        if(once) {
+            System.out.println("TrueBlockPos: " + pos.getWorldVar().x + "," + pos.getWorldVar().y);
+            once = false;
+        }
+
         g.drawImage(img, (int) pos.getWorldVar().x, (int) pos.getWorldVar().y, size, size, null);
     }
 
