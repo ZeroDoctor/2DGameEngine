@@ -27,29 +27,28 @@ public class Player extends Entity {
 
     private void checkTileCollision() {
     	for(int i = 0; i < tm.getSheetCount(); i++) {
-            //if(tm.getTileMap(i).getView() == 0) {
-                if(!bounds.collisionTile(0, dy, tm, tm.getTileMap(i))) {
-					if((PlayState.map.y >= 0 && PlayState.map.x >= 0) || PlayState.map.y >= 0) {
-						PlayState.map.y += dy;
-	                    pos.y += dy;
-	                    hitBounds.addY(dy);
-					} else {
-						PlayState.map.y = 0;
-						pos.y -= dy;
-					}
-                }
-                if(!bounds.collisionTile(dx, 0, tm, tm.getTileMap(i))) {
-					if((PlayState.map.x >= 0 && PlayState.map.y >= 0) || PlayState.map.x >= 0) {
-						PlayState.map.x += dx;
-	                    pos.x += dx;
-	                    hitBounds.addX(dx);
-					} else {
-						PlayState.map.x = 0;
-						pos.x -= dx;
-					}
-
-                }
-           // }
+            if(!bounds.collisionTile(0, dy, tm, tm.getTileMap(i))) {
+				if(PlayState.map.y >= 0) {
+					PlayState.map.y += dy;
+                    pos.y += dy;
+                    hitBounds.addY(dy);
+				} else {
+					PlayState.map.y = 0;
+					pos.y -= dy;
+                    hitBounds.addY(-dy);
+				}
+            }
+            if(!bounds.collisionTile(dx, 0, tm, tm.getTileMap(i))) {
+				if(PlayState.map.x >= 0) {
+					PlayState.map.x += dx;
+                    pos.x += dx;
+                    hitBounds.addX(dx);
+				} else {
+					PlayState.map.x = 0;
+					pos.x -= dx;
+                    hitBounds.addX(-dx);
+				}
+            }
         }
     }
 

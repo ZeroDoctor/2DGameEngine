@@ -65,10 +65,10 @@ public class AABB {
     public void setYOffset(float f) { yOffset = f; }
 
     public boolean collides(AABB bBox) {
-        float ax = ((pos.getWorldVar().x + (xOffset) + 1) + (w / 2));
-        float ay = ((pos.getWorldVar().y + (yOffset) + 1) + (h / 2));
-        float bx = ((bBox.pos.getWorldVar().x + (bBox.xOffset / 2) - 1) + (w / 2));
-        float by = ((bBox.pos.getWorldVar().y + (bBox.yOffset / 2) - 1) + (h / 2));
+        float ax = ((pos.getWorldVar().x + (xOffset)) + (w / 2));
+        float ay = ((pos.getWorldVar().y + (yOffset)) + (h / 2));
+        float bx = ((bBox.pos.getWorldVar().x + (bBox.xOffset / 2)) + (w / 2));
+        float by = ((bBox.pos.getWorldVar().y + (bBox.yOffset / 2)) + (h / 2));
 
         if(Math.abs(ax - bx) < (this.w / 2) + (bBox.w / 2)) {
             if(Math.abs(ay - by) < (this.h / 2) + (bBox.h / 2)) {
@@ -111,11 +111,11 @@ public class AABB {
                         yt = (int) (( (pos.y + ((int)(b / (boxes / 2))) * TileManager.minBlockSize) + ay) + ((int)(c / 2)) *
                             (h - TileManager.minBlockSize) + yOffset) / TileManager.minBlockSize;
                     } else {
-                        xt = (int) (( (pos.getWorldVar().x + ax) + (c % 2) *
-                            (w) - xOffset)) / TileManager.minBlockSize;
+                        xt = (int) (( (pos.x + ax) + (c % 2) *
+                            (w) + xOffset)) / TileManager.minBlockSize;
 
-                         yt = (int) (( (pos.getWorldVar().y + ay) + ((int)(c / 2)) *
-                            (h) - yOffset)) / TileManager.minBlockSize;
+                         yt = (int) (( (pos.y + ay) + ((int)(c / 2)) *
+                            (h) + yOffset)) / TileManager.minBlockSize;
                     }
 
                     if(ts.getBlock(xt, yt)) {

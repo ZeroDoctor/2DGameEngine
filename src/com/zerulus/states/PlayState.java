@@ -45,7 +45,7 @@ public class PlayState  {
 
         p = new Player(new Sprite("entity/linkFormatted.png"), new Vector2f(GamePanel.width + (GamePanel.width / 4 - 32), GamePanel.height + (GamePanel.height / 4 - 32)), tm);
         e = new ArrayList<Enemy>();
-        e.add(new Enemy(new Sprite("entity/linkFormatted.png"), new Vector2f(0,0), tm));
+        e.add(new Enemy(new Sprite("entity/linkFormatted.png"), new Vector2f(1000, 1000), tm));
 
         tb = new TestBlock(tm);
 
