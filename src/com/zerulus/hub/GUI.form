@@ -241,6 +241,10 @@
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
                         <Component class="javax.swing.JTree" name="jTree1">
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new MyTree(layers)"/>
+                            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="DefaultMutableTreeNode layers = new DefaultMutableTreeNode(&quot;Layers&quot;);&#xa;DefaultMutableTreeNode background = new DefaultMutableTreeNode(&quot;Background&quot;);&#xa;DefaultMutableTreeNode foreground = new DefaultMutableTreeNode(&quot;Foreground&quot;);&#xa;DefaultMutableTreeNode objects = new DefaultMutableTreeNode(&quot;Objects&quot;);&#xa;&#xa;layers.add(background);&#xa;layers.add(foreground);&#xa;layers.add(objects);"/>
+                          </AuxValues>
                         </Component>
                       </SubComponents>
                     </Container>

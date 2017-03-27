@@ -5,6 +5,8 @@
  */
 package com.zerulus.hub;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+
 /**
  *
  * @author Joshua Powell
@@ -48,7 +50,15 @@ public class GUI extends javax.swing.JFrame {
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        DefaultMutableTreeNode layers = new DefaultMutableTreeNode("Layers");
+        DefaultMutableTreeNode background = new DefaultMutableTreeNode("Background");
+        DefaultMutableTreeNode foreground = new DefaultMutableTreeNode("Foreground");
+        DefaultMutableTreeNode objects = new DefaultMutableTreeNode("Objects");
+
+        layers.add(background);
+        layers.add(foreground);
+        layers.add(objects);
+        jTree1 = new MyTree(layers);
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
