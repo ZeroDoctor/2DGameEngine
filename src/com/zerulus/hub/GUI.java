@@ -102,20 +102,23 @@ public class GUI extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
                 .addComponent(jButton1)
-                .addGap(0, 112, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(82, 82, 82)
+                .addGap(224, 224, 224)
                 .addComponent(jButton1)
-                .addContainerGap(562, Short.MAX_VALUE))
+                .addContainerGap(420, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab1", jPanel3);
+        jTabbedPane1.setTitleAt(0, "Project Explorer");
 
         jSplitPane1.setLeftComponent(jTabbedPane1);
+        jTabbedPane1.getAccessibleContext().setAccessibleName("Project Explorer");
         jTabbedPane1.getAccessibleContext().setAccessibleParent(jSplitPane1);
 
         jTabbedPane3.setAlignmentX(100.0F);
@@ -126,13 +129,20 @@ public class GUI extends javax.swing.JFrame {
 
         jSplitPane2.setLeftComponent(jSplitPane1);
 
+        jTabbedPane2.setToolTipText("Layers");
+        jTabbedPane2.setName("Layers"); // NOI18N
         jTabbedPane2.setPreferredSize(new java.awt.Dimension(25, 389));
 
+        jTree1.setToolTipText("Layers");
+        jTree1.setName("Layers"); // NOI18N
         jScrollPane1.setViewportView(jTree1);
+        jTree1.getAccessibleContext().setAccessibleName("Layers");
 
         jTabbedPane2.addTab("tab1", jScrollPane1);
+        jTabbedPane2.setTitleAt(0, "Layers");
 
         jSplitPane2.setRightComponent(jTabbedPane2);
+        jTabbedPane2.getAccessibleContext().setAccessibleName("Layers");
 
         jPanel1.add(jSplitPane2);
 
