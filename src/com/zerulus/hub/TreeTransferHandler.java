@@ -20,9 +20,11 @@ import javax.swing.tree.TreePath;
  * @author DanielCastro
  */
 public class TreeTransferHandler extends TransferHandler {
-    DataFlavor nodesFlavor;
-    DataFlavor[] flavors = new DataFlavor[1];
-    DefaultMutableTreeNode[] nodesToRemove;
+    private DataFlavor nodesFlavor;
+    private DataFlavor[] flavors = new DataFlavor[1];
+    private DefaultMutableTreeNode[] nodesToRemove;
+
+    private String rootPath = System.getProperty("user.dir");
 
     public TreeTransferHandler() {
         try {
@@ -130,7 +132,7 @@ public class TreeTransferHandler extends TransferHandler {
             DefaultMutableTreeNode copy = copy(node);
             copies.add(copy);
             toRemove.add(node);
-            
+
             for(int i = 1; i < paths.length; i++) {
                 DefaultMutableTreeNode next =
                     (DefaultMutableTreeNode)paths[i].getLastPathComponent();
@@ -251,6 +253,7 @@ public class TreeTransferHandler extends TransferHandler {
                 DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
                 node.setAllowsChildren(false);
                 background.add(node);
+                Copy.copyFile(f, new File(dirPath(rootPath) + "\\userproject\\res\\tiles\\"));
             }
 
             model.reload();
@@ -265,6 +268,18 @@ public class TreeTransferHandler extends TransferHandler {
     public boolean canPlace(String fileName) {
       if(fileName.substring(fileName.length() - 4, fileName.length()).equals(".png")) return true;
       return false;
+    }
+
+    public String dirPath(String rootPath) {
+
+        for(int i = rootPath.length() - 1; i > 0; i--) {
+            if(rootPath.charAt(i) == '\\') {
+                return rootPath.substring(0, i);
+            }
+        }
+        System.out.println("WARNING: cannot find previous directory!");
+        System.out.println("\t Am I in the root of the C drive?");
+        return rootPath;
     }
 
     public String toString() {

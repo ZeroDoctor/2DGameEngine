@@ -7,13 +7,13 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
-import com.zerulus.util.InputHandler;
-import com.zerulus.util.MouseHandler;
-import com.zerulus.states.PlayState;
+import com.zerulus.game.util.InputHandler;
+import com.zerulus.game.util.MouseHandler;
+import com.zerulus.game.states.PlayState;
 
 public class GamePanel extends JPanel implements Runnable {
     private static final long serialVersionUID = 1L;
-	
+
     private Thread thread;
     private Graphics2D g;
     private BufferedImage img;
@@ -22,7 +22,7 @@ public class GamePanel extends JPanel implements Runnable {
     public static int width;
     public static int height;
     public static int scale = 2;
-    
+
     private InputHandler keys;
     private MouseHandler mouse;
     private PlayState ps;
@@ -52,7 +52,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 
         ps = new PlayState();
-        
+
         mouse = new MouseHandler(this);
         keys = new InputHandler(this);
 
