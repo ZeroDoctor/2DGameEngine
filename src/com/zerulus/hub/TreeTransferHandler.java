@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.zerulus.hub;
 
 import java.awt.datatransfer.DataFlavor;
@@ -30,7 +25,6 @@ public class TreeTransferHandler extends TransferHandler {
     DefaultMutableTreeNode[] nodesToRemove;
 
     public TreeTransferHandler() {
-        System.out.println("Complete!!");
         try {
             String mimeType = DataFlavor.javaJVMLocalObjectMimeType +
                               ";class=\"" +
@@ -38,8 +32,10 @@ public class TreeTransferHandler extends TransferHandler {
                               "\"";
             nodesFlavor = new DataFlavor(mimeType);
             flavors[0] = nodesFlavor;
+
         } catch(ClassNotFoundException e) {
             System.out.println("ClassNotFound: " + e.getMessage());
+
         }
     }
 
@@ -98,20 +94,20 @@ public class TreeTransferHandler extends TransferHandler {
     private boolean haveCompleteNode(JTree tree) {
         int[] selRows = tree.getSelectionRows();
         TreePath path = tree.getPathForRow(selRows[0]);
-        DefaultMutableTreeNode first =
-            (DefaultMutableTreeNode)path.getLastPathComponent();
+        DefaultMutableTreeNode first = (DefaultMutableTreeNode)path.getLastPathComponent();
         int childCount = first.getChildCount();
+
         // first has children and no children are selected.
         if(childCount > 0 && selRows.length == 1)
             return false;
         // first may have children.
         for(int i = 1; i < selRows.length; i++) {
             path = tree.getPathForRow(selRows[i]);
-            DefaultMutableTreeNode next =
-                (DefaultMutableTreeNode)path.getLastPathComponent();
+            DefaultMutableTreeNode next = (DefaultMutableTreeNode)path.getLastPathComponent();
+
             if(first.isNodeChild(next)) {
                 // Found a child of first.
-                if(childCount > selRows.length-1) {
+                if(childCount > selRows.length - 1) {
                     // Not all children of first are selected.
                     return false;
                 }
@@ -134,6 +130,7 @@ public class TreeTransferHandler extends TransferHandler {
             DefaultMutableTreeNode copy = copy(node);
             copies.add(copy);
             toRemove.add(node);
+            
             for(int i = 1; i < paths.length; i++) {
                 DefaultMutableTreeNode next =
                     (DefaultMutableTreeNode)paths[i].getLastPathComponent();
@@ -148,6 +145,7 @@ public class TreeTransferHandler extends TransferHandler {
                     toRemove.add(next);
                 }
             }
+
             DefaultMutableTreeNode[] nodes = copies.toArray(new DefaultMutableTreeNode[copies.size()]);
             nodesToRemove = toRemove.toArray(new DefaultMutableTreeNode[toRemove.size()]);
             return new NodesTransferable(nodes, flavors, nodesFlavor);
@@ -183,8 +181,10 @@ public class TreeTransferHandler extends TransferHandler {
             nodes = (DefaultMutableTreeNode[]) t.getTransferData(nodesFlavor);
         } catch(UnsupportedFlavorException ufe) {
             System.out.println("UnsupportedFlavor: " + ufe.getMessage());
+
         } catch(java.io.IOException ioe) {
             System.out.println("I/O error: " + ioe.getMessage());
+
         }
 
         if(!nodes[0].toString().equals("Objects") && !nodes[0].toString().equals("Background") && !nodes[0].toString().equals("Foreground")) {
