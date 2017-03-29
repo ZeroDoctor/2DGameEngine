@@ -28,7 +28,7 @@ public class Copy {
             }
         } catch(Exception e) {
             e.printStackTrace();
-            System.out.println("ERROR: something went wrong with creating new file");
+            System.out.println("ERROR: failed to creating new file");
         }
 
         InputStream in = null;
@@ -54,6 +54,7 @@ public class Copy {
             }
         } catch(IOException e) {
             e.printStackTrace();
+            System.out.println("ERROR: faild to copy file");
         }
 
     }

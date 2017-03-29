@@ -37,7 +37,6 @@ public class TreeTransferHandler extends TransferHandler {
 
         } catch(ClassNotFoundException e) {
             System.out.println("ClassNotFound: " + e.getMessage());
-
         }
     }
 
