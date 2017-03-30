@@ -5,10 +5,13 @@
  */
 package com.zerulus.hub;
 
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -43,6 +46,8 @@ public class GUI extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+		jMenuItem2 = new javax.swing.JMenuItem();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jSplitPane2 = new javax.swing.JSplitPane();
@@ -64,7 +69,10 @@ public class GUI extends javax.swing.JFrame {
         layers.add(background);
         layers.add(foreground);
         layers.add(objects);
-        jTree1 = new MyTree(layers);
+		
+		DefaultTreeModel root = new DefaultTreeModel(layers, true);
+		
+        jTree1 = new MyTree(root);
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
@@ -81,8 +89,16 @@ public class GUI extends javax.swing.JFrame {
         jMenu5.setText("jMenu5");
 
         jMenuItem1.setText("jMenuItem1");
+		
+		jPopupMenu1.setToolTipText("remove");
+        jPopupMenu1.setLabel("");
+		
+		jMenuItem2.setText("remove");
+        jPopupMenu1.add(jMenuItem2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setTitle("AdventureMaker");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPanel2.setLayout(new java.awt.GridLayout(1, 0));
 
@@ -170,6 +186,11 @@ public class GUI extends javax.swing.JFrame {
 
         jTree1.setToolTipText("Layers");
         jTree1.setName("Layers"); // NOI18N
+		jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTree1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTree1);
         jTree1.getAccessibleContext().setAccessibleName("Layers");
 
@@ -221,6 +242,16 @@ public class GUI extends javax.swing.JFrame {
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox3ActionPerformed
+	
+	private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            int row = jTree1.getClosestRowForLocation(evt.getX(), evt.getY());
+            if(jTree1.getPathForRow(row).getPathCount() > 2) {
+                jTree1.setSelectionRow(row);
+                jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+        }
+    }//GEN-LAST:event_jTree1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -232,12 +263,7 @@ public class GUI extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -273,9 +299,11 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
+	private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+	private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPane2;
