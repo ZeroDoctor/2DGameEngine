@@ -8,9 +8,12 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+<<<<<<< HEAD
 import com.zerulus.game.states.PlayState;
 
 
+=======
+>>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e
 
 public class TileSet extends JPanel {
 
@@ -22,6 +25,7 @@ public class TileSet extends JPanel {
     private Dimension size;
     private int tilesetWidth;
     private int tilesetHeight;
+<<<<<<< HEAD
 
     private int xSelector = 0;
     private int ySelector = 0;
@@ -34,6 +38,16 @@ public class TileSet extends JPanel {
         this.f = f;
         this.size = size;
 
+=======
+    private int sizeSelector = 8;
+
+    public TileSet(File f, Dimension size) {
+        this.f = f;
+        this.size = size;
+        setPreferredSize(new Dimension(1000,1000));
+
+        System.out.println(size);
+>>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e
 
         try {
             image = ImageIO.read(f);
@@ -42,6 +56,7 @@ public class TileSet extends JPanel {
             e.printStackTrace();
         }
 
+<<<<<<< HEAD
         width = image.getWidth();
         height = image.getHeight();
         setPreferredSize(new Dimension(width, height));
@@ -61,6 +76,17 @@ public class TileSet extends JPanel {
 
     public void setSelector(int sizeSelector) {
         this.sizeSelector = sizeSelector;
+=======
+        mouse = new TabMouseHandler();
+        addMouseListener(mouse);
+        System.out.println("Here1");
+        test = setImageSize();
+    }
+
+    public void setSelector(String sizeSelector) {
+        String tempSize = sizeSelector.substring(0, sizeSelector.indexOf("x"));
+        this.sizeSelector = Integer.valueOf(tempSize);
+>>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e
     }
 
     public BufferedImage setImageSize() {
@@ -68,12 +94,20 @@ public class TileSet extends JPanel {
 
         int temp = image.getWidth();
 
+<<<<<<< HEAD
         if(size.getWidth() < image.getWidth()) {
             while(temp > size.getWidth()) {
                 temp = temp - sizeSelector;
 
             }
 
+=======
+        if(size.getWidth() + 175 < image.getWidth()) {
+            while(temp > size.getWidth() + 175) {
+                temp = temp - sizeSelector;
+
+            }
+>>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e
             img = image.getSubimage(temp, 0, image.getWidth() - temp, image.getHeight());
         }
 
@@ -84,6 +118,7 @@ public class TileSet extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+<<<<<<< HEAD
         g.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null);
 
         if(test != null)
@@ -92,6 +127,17 @@ public class TileSet extends JPanel {
 
         g.setColor(Color.RED);
         g.drawRect(xSelector, ySelector, sizeSelector, sizeSelector);
+=======
+        g.setColor(Color.RED);
+        g.drawRect(0, 0, sizeSelector / 2, sizeSelector / 2);
+
+
+        g.drawImage(image, 0, 0, (int) sizeSelector * 4, (int) image.getHeight(), null);
+
+        if(test != null)
+            g.drawImage(test, 0, 0, sizeSelector * 4, image.getHeight(), null);
+
+>>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e
 
         repaint();
     }

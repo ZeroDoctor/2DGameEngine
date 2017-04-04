@@ -4,14 +4,18 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+<<<<<<< HEAD
 import com.zerulus.game.states.PlayState;
 
+=======
+>>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e
 public class TabMouseHandler implements MouseListener, MouseMotionListener{
 
     private static int mouseX = -1;
     private static int mouseY = -1;
     private static int mouseB = -1;
 
+<<<<<<< HEAD
     private int x;
     private int y;
 
@@ -23,6 +27,10 @@ public class TabMouseHandler implements MouseListener, MouseMotionListener{
         this.ts = ts;
         this.id = id;
         this.ps = ps;
+=======
+    public TabMouseHandler() {
+
+>>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e
     }
 
     public int getX() {
@@ -49,6 +57,7 @@ public class TabMouseHandler implements MouseListener, MouseMotionListener{
 
     public void mouseClicked(MouseEvent e) {
 
+<<<<<<< HEAD
         x = e.getX() - (e.getX() % ts.getSizeSelector());
         y = e.getY() - (e.getY() % ts.getSizeSelector());
 
@@ -58,6 +67,8 @@ public class TabMouseHandler implements MouseListener, MouseMotionListener{
         ps.getTestBlock().setId(id + 1);
         ps.getTestBlock().setTile(x + y * ts.getSizeSelector());
 
+=======
+>>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e
     }
 
     public void mousePressed(MouseEvent e) {

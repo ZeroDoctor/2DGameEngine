@@ -5,12 +5,15 @@ import javax.swing.UIManager;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
+<<<<<<< HEAD
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.GraphicsDevice;
 import java.awt.DisplayMode;
 import java.awt.GraphicsEnvironment;
 
+=======
+>>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e
 import com.zerulus.hub.jtree.MyTree;
 
 /*
@@ -35,8 +38,13 @@ public class GUI extends javax.swing.JFrame {
         addGamePanel(gp);
     }
 
+<<<<<<< HEAD
     private void addGamePanel(GamePanel gp) {
         jTabbedPane3.addTab("Game.amx", gp);
+=======
+    private void addGamePanel() {
+        jTabbedPane3.addTab("Game.amx", new GamePanel(800,600));
+>>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e
     }
 
     /**
@@ -81,7 +89,11 @@ public class GUI extends javax.swing.JFrame {
 
 		DefaultTreeModel root = new DefaultTreeModel(layers, true);
 
+<<<<<<< HEAD
         jTree1 = new MyTree(root, jTabbedPane4, gp);
+=======
+        jTree1 = new MyTree(root, jTabbedPane4);
+>>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
