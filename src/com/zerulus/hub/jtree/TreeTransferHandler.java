@@ -16,11 +16,9 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
-<<<<<<< HEAD:src/com/zerulus/hub/jtree/TreeTransferHandler.java
 import com.zerulus.hub.GamePanel;
 import com.zerulus.game.states.PlayState;
-=======
->>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e:src/com/zerulus/hub/jtree/TreeTransferHandler.java
+
 import com.zerulus.hub.tiletab.TileSetTab;
 
 /**
@@ -28,10 +26,6 @@ import com.zerulus.hub.tiletab.TileSetTab;
  * @author DanielCastro
  */
 public class TreeTransferHandler extends TransferHandler {
-<<<<<<< HEAD:src/com/zerulus/hub/jtree/TreeTransferHandler.java
-
-=======
->>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e:src/com/zerulus/hub/jtree/TreeTransferHandler.java
     private DataFlavor nodesFlavor;
     private DataFlavor[] flavors = new DataFlavor[1];
     private DefaultMutableTreeNode[] nodesToRemove;
@@ -39,7 +33,6 @@ public class TreeTransferHandler extends TransferHandler {
     private String rootPath = System.getProperty("user.dir");
 
     private JTabbedPane jTabbedPane;
-<<<<<<< HEAD:src/com/zerulus/hub/jtree/TreeTransferHandler.java
     private PlayState ps;
     private int tab = 0;
 
@@ -48,23 +41,12 @@ public class TreeTransferHandler extends TransferHandler {
         this.jTabbedPane = jTabbedPane;
         if(ps == null) System.out.println("How Dare Thee");
         this.ps = ps;
-=======
-    private int tab = 0;
-
-    public TreeTransferHandler(JTabbedPane jTabbedPane) {
-
-        this.jTabbedPane = jTabbedPane;
->>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e:src/com/zerulus/hub/jtree/TreeTransferHandler.java
 
         try {
             String mimeType = DataFlavor.javaJVMLocalObjectMimeType +
                               ";class=\"" +
                 javax.swing.tree.DefaultMutableTreeNode[].class.getName() +
                               "\"";
-<<<<<<< HEAD:src/com/zerulus/hub/jtree/TreeTransferHandler.java
-
-=======
->>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e:src/com/zerulus/hub/jtree/TreeTransferHandler.java
             nodesFlavor = new DataFlavor(mimeType);
             flavors[0] = nodesFlavor;
 
@@ -89,13 +71,9 @@ public class TreeTransferHandler extends TransferHandler {
         if(!support.isDrop()) {
             return false;
         }
-<<<<<<< HEAD:src/com/zerulus/hub/jtree/TreeTransferHandler.java
 
         support.setShowDropLocation(true);
 
-=======
-        support.setShowDropLocation(true);
->>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e:src/com/zerulus/hub/jtree/TreeTransferHandler.java
         if(!support.isDataFlavorSupported(nodesFlavor)) {
             if(canImport((JComponent) support.getComponent(), support.getDataFlavors())) {
                 return importData((JComponent) support.getComponent(), support.getTransferable());
@@ -106,10 +84,7 @@ public class TreeTransferHandler extends TransferHandler {
         JTree tree = (JTree)support.getComponent();
         int dropRow = tree.getRowForPath(dl.getPath());
         int[] selRows = tree.getSelectionRows();
-<<<<<<< HEAD:src/com/zerulus/hub/jtree/TreeTransferHandler.java
 
-=======
->>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e:src/com/zerulus/hub/jtree/TreeTransferHandler.java
         for(int i = 0; i < selRows.length; i++) {
             if(selRows[i] == dropRow) {
                 return false;
@@ -118,10 +93,7 @@ public class TreeTransferHandler extends TransferHandler {
         // Do not allow MOVE-action drops if a non-leaf node is
         // selected unless all of its children are also selected.
         int action = support.getDropAction();
-<<<<<<< HEAD:src/com/zerulus/hub/jtree/TreeTransferHandler.java
 
-=======
->>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e:src/com/zerulus/hub/jtree/TreeTransferHandler.java
         if(action == MOVE) {
             return haveCompleteNode(tree);
         }
@@ -136,10 +108,7 @@ public class TreeTransferHandler extends TransferHandler {
             System.out.println("NO?");
             return false;
         }
-<<<<<<< HEAD:src/com/zerulus/hub/jtree/TreeTransferHandler.java
 
-=======
->>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e:src/com/zerulus/hub/jtree/TreeTransferHandler.java
         return true;
     }
 
@@ -165,20 +134,14 @@ public class TreeTransferHandler extends TransferHandler {
                 }
             }
         }
-<<<<<<< HEAD:src/com/zerulus/hub/jtree/TreeTransferHandler.java
 
-=======
->>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e:src/com/zerulus/hub/jtree/TreeTransferHandler.java
         return true;
     }
 
     protected Transferable createTransferable(JComponent c) {
         JTree tree = (JTree)c;
         TreePath[] paths = tree.getSelectionPaths();
-<<<<<<< HEAD:src/com/zerulus/hub/jtree/TreeTransferHandler.java
 
-=======
->>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e:src/com/zerulus/hub/jtree/TreeTransferHandler.java
         if(paths != null) {
             // Make up a node array of copies for transfer and
             // another for/of the nodes that will be removed in
@@ -210,10 +173,7 @@ public class TreeTransferHandler extends TransferHandler {
             nodesToRemove = toRemove.toArray(new DefaultMutableTreeNode[toRemove.size()]);
             return new NodesTransferable(nodes, flavors, nodesFlavor);
         }
-<<<<<<< HEAD:src/com/zerulus/hub/jtree/TreeTransferHandler.java
 
-=======
->>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e:src/com/zerulus/hub/jtree/TreeTransferHandler.java
         return null;
     }
 
@@ -261,7 +221,6 @@ public class TreeTransferHandler extends TransferHandler {
 
                 DefaultMutableTreeNode parent = (DefaultMutableTreeNode)dest.getLastPathComponent();
 
-<<<<<<< HEAD:src/com/zerulus/hub/jtree/TreeTransferHandler.java
                 if(parent.toString().equals("Objects")) {
                     ps.getTileManager().setView(0, nodes[0].toString());
                 }
@@ -271,8 +230,6 @@ public class TreeTransferHandler extends TransferHandler {
                     ps.getTileManager().setView(3, nodes[0].toString());
                 }
 
-=======
->>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e:src/com/zerulus/hub/jtree/TreeTransferHandler.java
                 if(parent.getAllowsChildren()) {
                   JTree tree = (JTree)support.getComponent();
                   DefaultTreeModel model = (DefaultTreeModel)tree.getModel();
@@ -293,10 +250,6 @@ public class TreeTransferHandler extends TransferHandler {
 
         }
 
-<<<<<<< HEAD:src/com/zerulus/hub/jtree/TreeTransferHandler.java
-=======
-
->>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e:src/com/zerulus/hub/jtree/TreeTransferHandler.java
         return false;
     }
 
@@ -311,10 +264,7 @@ public class TreeTransferHandler extends TransferHandler {
         }
 
         try {
-<<<<<<< HEAD:src/com/zerulus/hub/jtree/TreeTransferHandler.java
 
-=======
->>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e:src/com/zerulus/hub/jtree/TreeTransferHandler.java
             List data = (List) t.getTransferData(DataFlavor.javaFileListFlavor);
             Iterator i = data.iterator();
 
@@ -341,12 +291,7 @@ public class TreeTransferHandler extends TransferHandler {
                 Copy.copyFile(f, new File(dirPath(rootPath) + "\\userproject\\res\\tiles\\"));
             }
 
-<<<<<<< HEAD:src/com/zerulus/hub/jtree/TreeTransferHandler.java
             jTabbedPane.addTab("TileSet - " + tab, new TileSetTab(f, jTabbedPane.getSize(), ps, tab++));
-=======
-            jTabbedPane.addTab("TileSet-" + tab, new TileSetTab(f, jTabbedPane.getSize()));
-            tab++;
->>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e:src/com/zerulus/hub/jtree/TreeTransferHandler.java
 
             model.reload();
             return true;
@@ -354,7 +299,6 @@ public class TreeTransferHandler extends TransferHandler {
         } catch (Exception ioe) {
             System.out.println(ioe);
         }
-<<<<<<< HEAD:src/com/zerulus/hub/jtree/TreeTransferHandler.java
 
         return false;
     }
@@ -362,14 +306,6 @@ public class TreeTransferHandler extends TransferHandler {
     public boolean canPlace(String fileName) {
         if(fileName.substring(fileName.length() - 4, fileName.length()).equals(".png")) return true;
         return false;
-=======
-            return false;
-    }
-
-    public boolean canPlace(String fileName) {
-      if(fileName.substring(fileName.length() - 4, fileName.length()).equals(".png")) return true;
-      return false;
->>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e:src/com/zerulus/hub/jtree/TreeTransferHandler.java
     }
 
     public String dirPath(String rootPath) {
@@ -379,15 +315,9 @@ public class TreeTransferHandler extends TransferHandler {
                 return rootPath.substring(0, i);
             }
         }
-<<<<<<< HEAD:src/com/zerulus/hub/jtree/TreeTransferHandler.java
-
         System.out.println("WARNING: cannot find previous directory!");
         System.out.println("\t Am I in the C drive?");
 
-=======
-        System.out.println("WARNING: cannot find previous directory!");
-        System.out.println("\t Am I in the C drive?");
->>>>>>> 990e84c8b2604b06c69e0a06ca462e0c9d638e4e:src/com/zerulus/hub/jtree/TreeTransferHandler.java
         return rootPath;
     }
 
