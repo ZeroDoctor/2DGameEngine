@@ -1,6 +1,7 @@
 package com.zerulus.game.tiles;
 
 import java.awt.Graphics2D;
+import java.io.File;
 import java.util.HashMap;
 
 import com.zerulus.game.graphics.Sprite;
@@ -12,11 +13,31 @@ public class TileMap {
     private HashMap<String, Block> blocks;
     private int view = 0;
     private int size = 0;
+    private String name = "";
 
     public TileMap(String file, int width, int height) {
         sprite = new Sprite(file, width, height);
+        findName(file);
         blocks = new HashMap<String, Block>();
-        size = 16;//Math.max(width, height);
+        size = Math.max(width, height);
+    }
+
+    public TileMap(File file, int width, int height) {
+        sprite = new Sprite(file, width, height);
+        findName(file.toString());
+        blocks = new HashMap<String, Block>();
+        size = Math.max(width, height);
+    }
+
+    public void findName(String file) {
+        for(int i = file.length() - 1; i > 0; i--) {
+            if(file.charAt(i) == '\\') {
+                name = file.substring(i + 1, file.length());
+                System.out.println("Name Found is: " + name + "," + file.length());
+                return;
+            }
+        }
+
     }
 
     public void setView(int view) { this.view = view; }
@@ -82,5 +103,9 @@ public class TileMap {
         for(Block block: blocks.values()) {
             block.render(g);
         }
+    }
+
+    public String toString() {
+        return name;
     }
 }

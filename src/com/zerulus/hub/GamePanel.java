@@ -36,6 +36,17 @@ public class GamePanel extends JPanel implements Runnable {
         requestFocusInWindow();
     }
 
+    public PlayState getPlayState() {
+
+        if(ps != null) {
+            System.out.println("I am real");
+        } else {
+            ps = new PlayState();
+        }
+
+        return ps;
+    }
+
     public void addNotify() {
         super.addNotify();
 
@@ -51,7 +62,7 @@ public class GamePanel extends JPanel implements Runnable {
         g = (Graphics2D) img.getGraphics();
 
 
-        ps = new PlayState();
+        //ps = new PlayState();
 
         mouse = new MouseHandler(this);
         keys = new InputHandler(this);

@@ -1,0 +1,4 @@
+9:40 - 10:50
+worked on maximizing the JFrame on default.
+Making scroll bar in the tile set tab to 
+be dynamically resizable.

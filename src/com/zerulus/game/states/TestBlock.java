@@ -16,6 +16,7 @@ public class TestBlock {
 
     private int tile = 0;
     private String num = "";
+    private int id;
 
     public TestBlock(TileManager tm) {
         this.tm = tm;
@@ -33,6 +34,9 @@ public class TestBlock {
 
         num = "";
     }
+
+    public void setTile(int i) { tile = i; }
+    public void setId(int i) { id = i; }
 
     public void input(InputHandler keys, MouseHandler mouse) {
 
@@ -82,9 +86,8 @@ public class TestBlock {
                 int x = (int) (mouse.getX() + (Vector2f.worldX + (Vector2f.worldX % 32)));
         		int y = (int) (mouse.getY() + (Vector2f.worldY + (Vector2f.worldY % 32)));
 
-
         		tm.addBlock(tile, new Vector2f((int) ( ((x - (x % (GamePanel.scale * 16) )) + (Vector2f.worldX - (Vector2f.worldX % (GamePanel.scale * 16))) ) / GamePanel.scale) ,
-        				(int) ( ((y - (y % (GamePanel.scale * 16) )) + (Vector2f.worldY - (Vector2f.worldY % (GamePanel.scale * 16))) ) / GamePanel.scale)), 0);
+        				(int) ( ((y - (y % (GamePanel.scale * 16) )) + (Vector2f.worldY - (Vector2f.worldY % (GamePanel.scale * 16))) ) / GamePanel.scale)), id);
                         //- (int) ( (32 - (Vector2f.worldY % 32)) - (32 - (y % 32)) ) ), 0);
 
         	} else {

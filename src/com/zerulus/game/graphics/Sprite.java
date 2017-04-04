@@ -2,6 +2,7 @@ package com.zerulus.game.graphics;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.File;
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -15,8 +16,8 @@ public class Sprite {
     private final int TILE_SIZE = 32;
     public int w;
     public int h;
-    private final int WSPRITE;
-    private final int HSPRITE;
+    private int wSprite;
+    private int hSprite;
 
 
     public Sprite(String file) {
@@ -25,8 +26,8 @@ public class Sprite {
         System.out.println("Loading: " + file + "...");
         SPRITESHEET = loadSprite(file);
 
-        WSPRITE = SPRITESHEET.getWidth() / w;
-        HSPRITE = SPRITESHEET.getHeight() / h;
+        wSprite = SPRITESHEET.getWidth() / w;
+        hSprite = SPRITESHEET.getHeight() / h;
         loadSpriteArray();
     }
 
@@ -36,13 +37,51 @@ public class Sprite {
         System.out.println("Loading: " + file + "...");
         SPRITESHEET = loadSprite(file);
 
-        WSPRITE = SPRITESHEET.getWidth() / w;
-        HSPRITE = SPRITESHEET.getHeight() / h;
+        wSprite = SPRITESHEET.getWidth() / w;
+        hSprite = SPRITESHEET.getHeight() / h;
         loadSpriteArray();
+    }
+
+    public Sprite(File f, int w, int h) {
+        this.w = w;
+        this.h = h;
+        System.out.println("Loading: " + f.toString() + "...");
+        SPRITESHEET = loadSprite(f);
+
+        wSprite = SPRITESHEET.getWidth() / w;
+        hSprite = SPRITESHEET.getHeight() / h;
+        loadSpriteArray();
+    }
+
+    public void setSize(int width, int height) {
+        setWidth(width);
+        setHeight(height);
+    }
+
+    public void setWidth(int i) {
+        w = i;
+        wSprite = SPRITESHEET.getWidth() / w;
+    }
+
+    public void setHeight(int i) {
+        h = i;
+        hSprite = SPRITESHEET.getWidth() / h;
     }
 
     public int getWidth() { return w; }
     public int getHeight() { return h; }
+
+    private BufferedImage loadSprite(File f) {
+        BufferedImage sprite = null;
+
+        try{
+            sprite = ImageIO.read(f);
+        } catch(IOException e) {
+            System.out.println("ERROR: could not load file: " + f.toString());
+        }
+
+        return sprite;
+    }
 
     private BufferedImage loadSprite(String file) {
         BufferedImage sprite = null;
@@ -57,10 +96,10 @@ public class Sprite {
     }
 
     private void loadSpriteArray() {
-        spriteArray = new BufferedImage[HSPRITE][WSPRITE];
+        spriteArray = new BufferedImage[hSprite][wSprite];
 
-        for(int y = 0; y < HSPRITE; y++) {
-            for(int x = 0; x < WSPRITE; x++) {
+        for(int y = 0; y < hSprite; y++) {
+            for(int x = 0; x < wSprite; x++) {
                 spriteArray[y][x] = getSprite(x,y);
             }
         }

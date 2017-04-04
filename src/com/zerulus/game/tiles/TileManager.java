@@ -28,7 +28,7 @@ public class TileManager {
 	}
 
     public int getSheetCount() { return sheetCount; }
-    public TileMap getTileMap(int i) {return ts[i]; }
+    public TileMap getTileMap(int i) { return ts[i]; }
     public int getTileMapSize() { return ts.length; }
     //public int getMinTileSize() { return minBlockSize; }
 
@@ -36,8 +36,12 @@ public class TileManager {
 
 	public void addBlock(int id, Vector2f pos, int tileSheet) {
 		if(tileSheet > sheetCount) {
-	        System.out.println("That tile sheet does not exist");
-		} else {
+	        System.out.println("outside the bounds of tile sheet");
+		}
+		else if(ts[tileSheet] == null) {
+			System.out.println("That tile sheet does not exist");
+		}
+		else {
 	        ts[tileSheet].addBlock(id, pos);
 		}
 	}
@@ -48,8 +52,12 @@ public class TileManager {
 		}
 	}
 
+	public void setTileMapSize(int id, int w, int h) {
+		ts[id].getTileSprite().setSize(w, h);
+	}
+
 	public void addTileMap(TileMap ts) {
-		minBlockSize = 16;//Math.min(minBlockSize, ts.getSize());
+		minBlockSize = Math.min(minBlockSize, ts.getSize());
 		if(sheetCount <= 6) {
 		    this.ts[sheetCount++] = ts;
 		    this.ts[sheetCount - 1].setView(BACK);
@@ -79,6 +87,19 @@ public class TileManager {
 	    } else {
 	        ts[tileSheet].setView(view);
 	    }
+	}
+	/* TODO: fix naming bug
+		two tileset could have the same name
+		so that could ruin the application when setting
+		the view to a tileset
+	**/
+	public void setView(int view, String tileSheet) {
+
+		for(int i = 0; i < sheetCount; i++) {
+			if(ts[i].toString().equals(tileSheet)) {
+				ts[i].setView(view);
+			}
+		}
 	}
 
 	public void update() {
