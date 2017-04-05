@@ -34,7 +34,7 @@ public class TileManager {
 
    //public void setMinTileSize(int i) { minBlockSize = i; }
 
-	public void addBlock(int id, Vector2f pos, int tileSheet) {
+	public void addBlock(int imageX, int imageY, Vector2f pos, int tileSheet) {
 		if(tileSheet > sheetCount) {
 	        System.out.println("outside the bounds of tile sheet");
 		}
@@ -42,7 +42,7 @@ public class TileManager {
 			System.out.println("That tile sheet does not exist");
 		}
 		else {
-	        ts[tileSheet].addBlock(id, pos);
+	        ts[tileSheet].addBlock(imageX, imageY, pos);
 		}
 	}
 
@@ -53,11 +53,18 @@ public class TileManager {
 	}
 
 	public void setTileMapSize(int id, int w, int h) {
-		ts[id].getTileSprite().setSize(w, h);
+		ts[id].setSize(w, h);
+		minBlockSize = Math.min(minBlockSize, Math.max(w, h));
+	}
+
+	private void findMinBlockSize() {
+		for(int i = 0; i < sheetCount; i++) {
+			minBlockSize = Math.min(minBlockSize, ts[i].getSize());
+		}
 	}
 
 	public void addTileMap(TileMap ts) {
-		minBlockSize = Math.min(minBlockSize, ts.getSize());
+		findMinBlockSize();
 		if(sheetCount <= 6) {
 		    this.ts[sheetCount++] = ts;
 		    this.ts[sheetCount - 1].setView(BACK);

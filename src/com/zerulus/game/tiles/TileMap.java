@@ -44,32 +44,39 @@ public class TileMap {
     public int getView() { return view; }
 
     public int getSize() { return size; }
+    public void setSize(int w, int h) {
+        size = Math.max(w, h);
+        sprite.setSize(w, h);
+    }
 
     public Sprite getTileSprite() { return sprite; }
 
-    public void addBlock(int id, Vector2f pos) {
+    public void addBlock(int imageX, int imageY, Vector2f pos) {
     	if(blocks.containsKey(Integer.toString((int) pos.x / size) + "," + Integer.toString((int) pos.y / size))) {
-            if(blocks.get(Integer.toString((int) pos.x / size) + "," + Integer.toString((int) pos.y / size)).getId() != id) {
+            if(blocks.get(Integer.toString((int) pos.x / size) + "," + Integer.toString((int) pos.y / size)).getId() != (imageX + imageY * size)) {
                 System.out.println("Removing current block!");
                 //removeBlock(x, y);
-                blocks.put(Integer.toString((int) pos.x / size) + "," + Integer.toString((int) pos.y / size), new Block(id, size, pos.getWorldVar(), this));
+                blocks.put(Integer.toString((int) pos.x / size) + "," + Integer.toString((int) pos.y / size), new Block(imageX, imageY, size, pos.getWorldVar(), this));
             } else {
                 System.out.println("Why? Its the same block!");
             }
     	} else {
             if(size > TileManager.minBlockSize) {
                 for(int i = 0; i < Math.pow((size / TileManager.minBlockSize), 2); i++) {
-                    if(i != 0) id = -1;
+                    if(i != 0) {
+                        imageX = -1;
+                        imageY = 0;
+                    }
                     int xt = ((int) pos.x / TileManager.minBlockSize) + (i % (size / TileManager.minBlockSize) );
                     int yt = ((int) pos.y / TileManager.minBlockSize) + ((int) (i / (size / TileManager.minBlockSize)) );
 
                     blocks.put(Integer.toString(xt) + "," + Integer.toString(yt),
-                                    new Block(id, size, pos.getWorldVar(), this));
+                                    new Block(imageX, imageY, size, pos.getWorldVar(), this));
                 }
     		} else {
                     System.out.println("Key: " + (pos.x / size) + ", " + ((pos.y / size)) + "\nBlock: " + pos + "\nWorldBlock: " + pos.getWorldVar());
                     blocks.put(Integer.toString((int) pos.x / size) + "," + Integer.toString((int) (pos.y / size)),
-                                    new Block(id, size, pos, this));
+                                    new Block(imageX, imageY, size, pos, this));
     		}
 
     	}

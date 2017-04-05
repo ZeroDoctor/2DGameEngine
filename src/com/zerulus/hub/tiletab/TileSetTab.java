@@ -43,7 +43,7 @@ public class TileSetTab extends JPanel {
                 tempSize = tempSize.substring(0, tempSize.indexOf("x"));
                 int temp = Integer.valueOf(tempSize);
                 ts.setSelector(temp);
-
+                
                 ps.getTileManager().setTileMapSize(id + 1, temp, temp);
             }
         });
