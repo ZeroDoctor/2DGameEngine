@@ -1,13 +1,18 @@
 package com.zerulus.hub;
 
+import java.io.*;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
+import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+
 import com.zerulus.hub.jtree.MyTree;
 
 /*
@@ -20,6 +25,11 @@ import com.zerulus.hub.jtree.MyTree;
  *
  * @author Joshua Powell
  */
+
+
+
+
+
 public class GUI extends javax.swing.JFrame {
 	private static final long serialVersionUID = 1L;
 
@@ -103,8 +113,8 @@ public class GUI extends javax.swing.JFrame {
 
 
         jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
+        jMenuBar1.add(jMenu1);      	
+        
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
 
@@ -242,10 +252,19 @@ public class GUI extends javax.swing.JFrame {
 
         newProject.setText("New Project");
         jMenu3.add(newProject);
-
+        	newProject.addActionListener(new java.awt.event.ActionListener(){
+        		public void actionPerformed(java.awt.event.ActionEvent evt) {
+        			
+        		}
+        	});
+        	
         openProject.setText("Open Project");
         jMenu3.add(openProject);
-
+        	openProject.addActionListener(new java.awt.event.ActionListener(){
+        		public void actionPerformed(java.awt.event.ActionEvent evt){
+							
+        		}
+        	});
         Save.setText("Save");
         jMenu3.add(Save);
 
@@ -262,6 +281,13 @@ public class GUI extends javax.swing.JFrame {
 
         Exit.setText("Exit");
         jMenu3.add(Exit);
+        
+        Exit.addActionListener(new java.awt.event.ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}       	
+        });
 
         jMenu6.setText("Edit");
         jMenuBar2.add(jMenu6);
