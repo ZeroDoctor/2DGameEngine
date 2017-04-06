@@ -1,5 +1,6 @@
 package com.zerulus.hub;
 
+import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -77,13 +78,30 @@ public class GUI extends javax.swing.JFrame {
 
 		DefaultTreeModel root = new DefaultTreeModel(layers, true);
         jTree1 = new MyTree(root, jTabbedPane4, gp);
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
+        newProject = new javax.swing.JMenuItem();
+        openProject = new javax.swing.JMenuItem();
+        Save = new javax.swing.JMenuItem();
+        saveAs = new javax.swing.JMenuItem();
+        Import = new javax.swing.JMenuItem();
+        Exit = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
+        Insert = new javax.swing.JMenuItem();
+        Duplicate = new javax.swing.JMenuItem();
+        Delete = new javax.swing.JMenuItem();
+        Resources = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
+        ToolBox = new javax.swing.JMenuItem();
+        ViewOptions = new javax.swing.JMenuItem();
+        MinimizeViews = new javax.swing.JMenuItem();
+        CloseViews = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
-
+        
+        
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -98,6 +116,7 @@ public class GUI extends javax.swing.JFrame {
         jPopupMenu1.setLabel("");
 
 		jMenuItem2.setText("remove");
+		
 		jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -220,12 +239,75 @@ public class GUI extends javax.swing.JFrame {
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
+        
+        newProject.setText("New Project");
+        jMenu3.add(newProject);
+
+        openProject.setText("Open Project");
+        jMenu3.add(openProject);
+
+        Save.setText("Save");
+        jMenu3.add(Save);
+
+        saveAs.setText("Save as");
+        saveAs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(saveAs);
+
+        Import.setText("Import");
+        jMenu3.add(Import);
+
+        Exit.setText("Exit");
+        jMenu3.add(Exit);
 
         jMenu6.setText("Edit");
         jMenuBar2.add(jMenu6);
+        
+        Insert.setText("Insert");
+        Insert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actionPerformed(evt);
+            }
+        });
+        jMenu6.add(Insert);
+
+        Duplicate.setText("Duplicate");
+        Duplicate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actionPerformed(evt);
+            }
+        });
+        jMenu6.add(Duplicate);
+
+        Delete.setText("Delete");
+        jMenu6.add(Delete);
+
+        Resources.setText("Resources");
+        jMenu6.add(Resources);
 
         jMenu4.setText("View");
         jMenuBar2.add(jMenu4);
+        
+        ToolBox.setText("Toolbox");
+        ToolBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actionPerformed(evt);
+            }
+        });
+        jMenu4.add(ToolBox);
+
+        ViewOptions.setText("View Options");
+        jMenu4.add(ViewOptions);
+
+        MinimizeViews.setText("Minimize Views");
+        jMenu4.add(MinimizeViews);
+
+        CloseViews.setText("Close Views");
+        jMenu4.add(CloseViews);
+
 
         jMenu7.setText("Load");
         jMenuBar2.add(jMenu7);
@@ -309,6 +391,18 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem CloseViews;
+    private javax.swing.JMenuItem Delete;
+    private javax.swing.JMenuItem Duplicate;
+    private javax.swing.JMenuItem Exit;
+    private javax.swing.JMenuItem Import;
+    private javax.swing.JMenuItem Insert;
+    private javax.swing.JMenuItem MinimizeViews;
+    private javax.swing.JMenuItem Resources;
+    private javax.swing.JMenuItem Save;
+    private javax.swing.JMenuItem ToolBox;
+    private javax.swing.JMenuItem ViewOptions;
+    private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
@@ -331,6 +425,7 @@ public class GUI extends javax.swing.JFrame {
 	private javax.swing.JPanel jPanel4;
 	private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -338,5 +433,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane3;
 	private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTree jTree1;
+    private javax.swing.JMenuItem newProject;
+    private javax.swing.JMenuItem openProject;
+    private javax.swing.JMenuItem saveAs;
     // End of variables declaration//GEN-END:variables
 }
