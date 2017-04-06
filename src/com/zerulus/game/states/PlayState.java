@@ -36,8 +36,8 @@ public class PlayState  {
         Vector2f.setWorldVar(map.x, map.y);
 
         tm = new TileManager();
-        tm.addTileMap(new TileMap("tiles\\dungeon_tiles_formatted.png", 16, 16));
-        tm.setView(0, 0);
+/*      tm.addTileMap(new TileMap("tiles\\dungeon_tiles_formatted.png", 16, 16));
+        tm.setView(0, 0);*/
 
         p = new Player(new Sprite("entity\\linkFormatted.png"), new Vector2f(GamePanel.width + (GamePanel.width / 4 - 32), GamePanel.height + (GamePanel.height / 4 - 32)), tm);
 

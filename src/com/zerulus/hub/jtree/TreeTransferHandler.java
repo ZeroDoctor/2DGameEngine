@@ -26,7 +26,7 @@ import com.zerulus.hub.tiletab.TileSetTab;
  */
 public class TreeTransferHandler extends TransferHandler {
 	private static final long serialVersionUID = 1L;
-	
+
 	private DataFlavor nodesFlavor;
     private DataFlavor[] flavors = new DataFlavor[1];
     private DefaultMutableTreeNode[] nodesToRemove;
@@ -228,7 +228,7 @@ public class TreeTransferHandler extends TransferHandler {
                 else if(parent.toString().equals("Background")) {
                     ps.getTileManager().setView(2, nodes[0].toString());
                 } else {
-                    ps.getTileManager().setView(3, nodes[0].toString());
+                    ps.getTileManager().setView(1, nodes[0].toString());
                 }
 
                 if(parent.getAllowsChildren()) {
@@ -267,8 +267,8 @@ public class TreeTransferHandler extends TransferHandler {
         try {
 
             @SuppressWarnings("unchecked")
-			List<Object> data = (List<Object>) t.getTransferData(DataFlavor.javaFileListFlavor);
-            Iterator<Object> i = data.iterator();
+			List<?> data = (List<?>) t.getTransferData(DataFlavor.javaFileListFlavor);
+            Iterator<?> i = data.iterator();
 
             MyTree tree = (MyTree) comp;
             DefaultTreeModel model = (DefaultTreeModel) tree.getModel();

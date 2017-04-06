@@ -1,7 +1,10 @@
 package com.zerulus.game.tiles;
 
-import java.awt.Graphics2D;
 import com.zerulus.game.util.Vector2f;
+import java.awt.Graphics2D;
+import java.util.Set;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class TileManager {
 
@@ -20,11 +23,14 @@ public class TileManager {
 	private final int FORE = 1;
 	private final int BACK = 2;
 
+	public HashMap<String, Block> objBlocks;
+
 	// Note: This could be static, so the AABB class can use it
 	public static int minBlockSize = Integer.MAX_VALUE;
 
 	public TileManager() {
 		ts = new TileMap[6];
+		objBlocks = new HashMap<String, Block>();
 	}
 
     public int getSheetCount() { return sheetCount; }
@@ -58,19 +64,22 @@ public class TileManager {
 	}
 
 	private void findMinBlockSize() {
+		System.out.println("min size Before: " + minBlockSize);
 		if(sheetCount == 1) {
-			minBlockSize = Math.min(minBlockSize, ts[sheetCount - 1].getSize());
+			minBlockSize = ts[sheetCount - 1].getSize();
 		} else {
 			for(int i = 0; i <= sheetCount - 2; i++) {
 				minBlockSize = Math.min(ts[i].getSize(), ts[i + 1].getSize());
 			}
 		}
+		System.out.println("min size After: " + minBlockSize);
 	}
 
 	public void addTileMap(TileMap ts) {
 		if(sheetCount <= 6) {
 		    this.ts[sheetCount++] = ts;
 		    this.ts[sheetCount - 1].setView(BACK);
+			this.ts[sheetCount - 1].setTileManager(this);
 			findMinBlockSize();
 		}
 		else
@@ -93,7 +102,16 @@ public class TileManager {
 	    if(tileSheet > sheetCount) {
 	        System.out.println("That tile sheet does not exist");
 	    } else {
+			System.out.println("Changing view : " + tileSheet + " at " + tileSheet);
+			if(ts[tileSheet].getView() == 0 && view != 0) {
+				removingHashMap(ts[tileSheet].getBlocks());
+			}
+
 	        ts[tileSheet].setView(view);
+
+			if(view == 0) {
+				objBlocks.putAll(ts[tileSheet].getBlocks());
+			}
 	    }
 	}
 	/* TODO: fix naming bug
@@ -105,9 +123,24 @@ public class TileManager {
 
 		for(int i = 0; i < sheetCount; i++) {
 			if(ts[i].toString().equals(tileSheet)) {
-				System.out.println("Changing view : " + tileSheet);
+				System.out.println("Changing view : " + tileSheet + " at " + i);
+				if(ts[i].getView() == 0 && view != 0) {
+					removingHashMap(ts[i].getBlocks());
+				}
 				ts[i].setView(view);
+
+				if(view == 0) {
+					objBlocks.putAll(ts[i].getBlocks());
+				}
 			}
+		}
+	}
+
+	private void removingHashMap(HashMap<String, Block> blocks) {
+		Set<String> set = blocks.keySet();
+		Iterator it = set.iterator();
+		while(it.hasNext()) {
+			objBlocks.remove(it.next());
 		}
 	}
 

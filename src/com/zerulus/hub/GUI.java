@@ -100,8 +100,8 @@ public class GUI extends javax.swing.JFrame {
         MinimizeViews = new javax.swing.JMenuItem();
         CloseViews = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
-        
-        
+
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -116,7 +116,7 @@ public class GUI extends javax.swing.JFrame {
         jPopupMenu1.setLabel("");
 
 		jMenuItem2.setText("remove");
-		
+
 		jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -239,7 +239,7 @@ public class GUI extends javax.swing.JFrame {
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
-        
+
         newProject.setText("New Project");
         jMenu3.add(newProject);
 
@@ -265,7 +265,7 @@ public class GUI extends javax.swing.JFrame {
 
         jMenu6.setText("Edit");
         jMenuBar2.add(jMenu6);
-        
+
         Insert.setText("Insert");
         Insert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -290,7 +290,7 @@ public class GUI extends javax.swing.JFrame {
 
         jMenu4.setText("View");
         jMenuBar2.add(jMenu4);
-        
+
         ToolBox.setText("Toolbox");
         ToolBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

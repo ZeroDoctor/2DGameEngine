@@ -55,9 +55,9 @@ public class TabMouseHandler implements MouseListener, MouseMotionListener{
         ts.setSelectorX(x);
         ts.setSelectorY(y);
 
-        System.out.println(id + 1);
+        System.out.println(id);
 
-        ps.getTestBlock().setId(id + 1);
+        ps.getTestBlock().setId(id);
         ps.getTestBlock().setTile(x / ts.getSizeSelector(), y / ts.getSizeSelector());
     }
 

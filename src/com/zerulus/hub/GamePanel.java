@@ -86,6 +86,8 @@ public class GamePanel extends JPanel implements Runnable {
         int frameCount = 0;
         int lastSecondTime = (int) (lastUpdateTime / 1000000000);
 
+        int oldFrameCount = 0;
+
         while(running) {
 
             double now = System.nanoTime();
@@ -110,7 +112,11 @@ public class GamePanel extends JPanel implements Runnable {
 
             int thisSecond = (int) (lastUpdateTime / 1000000000);
             if (thisSecond > lastSecondTime) {
-                System.out.println("NEW SECOND " + thisSecond + " " + frameCount);
+                if(frameCount != oldFrameCount) {
+                    System.out.println("NEW SECOND " + thisSecond + " " + frameCount);
+                    oldFrameCount = frameCount;
+                }
+                
                 frameCount = 0;
                 lastSecondTime = thisSecond;
             }

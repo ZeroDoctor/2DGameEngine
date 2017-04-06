@@ -1,8 +1,6 @@
 package com.zerulus.game.graphics;
 
 import java.awt.image.BufferedImage;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 
 public class Animation {
 
@@ -23,11 +21,6 @@ public class Animation {
 	public Animation() {
 		timesPlayed = 0;
 	}
-
-    public AffineTransformOp rotate(double angle, int w, int h) {
-    	AffineTransform tx = AffineTransform.getRotateInstance(angle, w / 2, h / 2);
-    	return new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-    }
 
 	public void setFrames(BufferedImage[] frames) {
 		this.frames = frames;

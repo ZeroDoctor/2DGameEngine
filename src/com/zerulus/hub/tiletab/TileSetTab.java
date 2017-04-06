@@ -23,10 +23,9 @@ public class TileSetTab extends JPanel {
 
         setLayout(null);
         JToolBar toolbar = new JToolBar();
-        TileMap tm = new TileMap(f, 8, 8);
         final TileSet ts = new TileSet(f, size, ps, id);
 
-        ps.getTileManager().addTileMap(tm);
+        ps.getTileManager().addTileMap(new TileMap(f, 8, 8));
         JScrollPane scrollPane = new JScrollPane(ts);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -38,10 +37,10 @@ public class TileSetTab extends JPanel {
 
                 String tempSize = combSize.getSelectedItem().toString();
                 tempSize = tempSize.substring(0, tempSize.indexOf("x"));
-                int temp = Integer.valueOf(tempSize);
-                ts.setSelector(temp);
-                
-                ps.getTileManager().setTileMapSize(id + 1, temp, temp);
+                int tileSize = Integer.valueOf(tempSize);
+                ts.setSelector(tileSize);
+				System.out.println(id);
+                ps.getTileManager().setTileMapSize(id, tileSize, tileSize);
             }
         });
 

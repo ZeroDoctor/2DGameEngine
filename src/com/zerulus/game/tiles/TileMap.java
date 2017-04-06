@@ -1,11 +1,11 @@
 package com.zerulus.game.tiles;
 
+import com.zerulus.game.graphics.Sprite;
+import com.zerulus.game.util.Vector2f;
 import java.awt.Graphics2D;
 import java.io.File;
 import java.util.HashMap;
-
-import com.zerulus.game.graphics.Sprite;
-import com.zerulus.game.util.Vector2f;
+import java.util.Vector;
 
 public class TileMap {
 
@@ -14,6 +14,8 @@ public class TileMap {
     private int view = 0;
     private int size = 0;
     private String name = "";
+
+    private TileManager tm;
 
     public TileMap(String file, int width, int height) {
         sprite = new Sprite(file, width, height);
@@ -29,6 +31,8 @@ public class TileMap {
         size = Math.max(width, height);
     }
 
+    public void setTileManager(TileManager tm) { this.tm = tm; }
+
     public void findName(String file) {
         for(int i = file.length() - 1; i > 0; i--) {
             if(file.charAt(i) == '\\') {
@@ -37,7 +41,6 @@ public class TileMap {
                 return;
             }
         }
-
     }
 
     public void setView(int view) { this.view = view; }
@@ -52,7 +55,14 @@ public class TileMap {
     public Sprite getTileSprite() { return sprite; }
 
     public void addBlock(int imageX, int imageY, Vector2f pos) {
-    	if(blocks.containsKey(Integer.toString((int) pos.x / size) + "," + Integer.toString((int) pos.y / size))) {
+        if(view == 0) {
+            addBlockObj(imageX, imageY, pos);
+        }
+        addBlockNorm(imageX, imageY, pos);
+    }
+
+    private void addBlockNorm(int imageX, int imageY, Vector2f pos) {
+        if(blocks.containsKey(Integer.toString((int) pos.x / size) + "," + Integer.toString((int) pos.y / size))) {
             if(blocks.get(Integer.toString((int) pos.x / size) + "," + Integer.toString((int) pos.y / size)).getId() != (imageX + imageY * size)) {
 
                 System.out.println("Removing current block!");
@@ -81,7 +91,39 @@ public class TileMap {
                     blocks.put(Integer.toString((int) pos.x / size) + "," + Integer.toString((int) (pos.y / size)),
                                     new Block(imageX, imageY, size, pos, this));
     		}
+    	}
+    }
 
+    public void addBlockObj(int imageX, int imageY, Vector2f pos) {
+        if(tm.objBlocks.containsKey(Integer.toString((int) pos.x / size) + "," + Integer.toString((int) pos.y / size))) {
+            if(tm.objBlocks.get(Integer.toString((int) pos.x / size) + "," + Integer.toString((int) pos.y / size)).getId() != (imageX + imageY * size)) {
+
+                System.out.println("Removing current block!");
+                removeBlock((int) pos.x, (int) pos.y);
+                tm.objBlocks.put(Integer.toString((int) pos.x / size) + "," + Integer.toString((int) pos.y / size),
+                                new Block(imageX, imageY, size, pos, this));
+
+            } else {
+                System.out.println("Why? Its the same block!");
+            }
+    	} else {
+            if(size > TileManager.minBlockSize) {
+                for(int i = 0; i < Math.pow((size / TileManager.minBlockSize), 2); i++) {
+                    if(i != 0) {
+                        imageX = -1;
+                        imageY = 0;
+                    }
+                    int xt = ((int) pos.x / TileManager.minBlockSize) + (i % (size / TileManager.minBlockSize) );
+                    int yt = ((int) pos.y / TileManager.minBlockSize) + ((int) (i / (size / TileManager.minBlockSize)) );
+
+                    tm.objBlocks.put(Integer.toString(xt) + "," + Integer.toString(yt),
+                                    new Block(imageX, imageY, size, pos, this));
+                }
+    		} else {
+                    System.out.println("Key: " + (pos.x / size) + ", " + ((pos.y / size)) + "\nWorldLocation: " + pos);
+                    tm.objBlocks.put(Integer.toString((int) pos.x / size) + "," + Integer.toString((int) (pos.y / size)),
+                                    new Block(imageX, imageY, size, pos, this));
+    		}
     	}
     }
 
@@ -96,6 +138,9 @@ public class TileMap {
     public boolean removeBlock(int x, int y) {
     	if(blocks.containsKey(Integer.toString((x / TileManager.minBlockSize)) + "," + Integer.toString((y / TileManager.minBlockSize)))) {
     		blocks.remove(Integer.toString((x / TileManager.minBlockSize)) + "," + Integer.toString((y / TileManager.minBlockSize)));
+            if(view == 0) {
+                tm.objBlocks.remove(Integer.toString((x / TileManager.minBlockSize)) + "," + Integer.toString((y / TileManager.minBlockSize)));
+            }
     		return true;
     	}
 
@@ -105,6 +150,8 @@ public class TileMap {
     public boolean getBlock(int x, int y){
         return blocks.containsKey(Integer.toString(x) + "," + Integer.toString(y));
     }
+
+    public HashMap<String, Block> getBlocks () { return blocks; }
 
     public void render(Graphics2D g) {
     	// ArrayList would probably be better
