@@ -95,7 +95,7 @@ public class AABB {
      * loop through the entire list just to check if one block collided
      * with an entity.
      * */
-    public boolean collisionTile(float ax, float ay, TileManager tm, TileMap ts) {
+    public boolean collisionTile(float ax, float ay, TileMap ts) {
         if(ts.getView() == 0) {
             int boxes = (int) Math.pow((int) (size / TileManager.minBlockSize), 2);
             for(int b = 0; b < boxes; b++) {
@@ -111,11 +111,9 @@ public class AABB {
                         yt = (int) (( (pos.y + ((int)(b / (boxes / 2))) * TileManager.minBlockSize) + ay) + ((int)(c / 2)) *
                             (h - TileManager.minBlockSize) + yOffset) / TileManager.minBlockSize;
                     } else {
-                        xt = (int) (( (pos.x + ax) + (c % 2) *
-                            (w) + xOffset)) / TileManager.minBlockSize;
+                        xt = (int) (( (pos.x + ax) + (c % 2) * (w) + xOffset)) / TileManager.minBlockSize;
 
-                         yt = (int) (( (pos.y + ay) + ((int)(c / 2)) *
-                            (h) + yOffset)) / TileManager.minBlockSize;
+                        yt = (int) (( (pos.y + ay) + ((int)(c / 2)) * (h) + yOffset)) / TileManager.minBlockSize;
                     }
 
                     if(ts.getBlock(xt, yt)) {

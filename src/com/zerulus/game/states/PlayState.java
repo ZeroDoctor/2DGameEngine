@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import com.zerulus.game.entity.Enemy;
 import com.zerulus.game.entity.Player;
-import com.zerulus.game.graphics.Font;
 import com.zerulus.game.graphics.Sprite;
 import com.zerulus.hub.GamePanel;
 import com.zerulus.game.tiles.TileManager;
@@ -26,7 +25,6 @@ public class PlayState  {
     private Player p;
     private ArrayList<Enemy> e;
 
-    private Font f;
 
     private TileManager tm;
 

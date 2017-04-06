@@ -7,10 +7,6 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.GraphicsDevice;
-import java.awt.DisplayMode;
-import java.awt.GraphicsEnvironment;
-
 import com.zerulus.hub.jtree.MyTree;
 
 /*

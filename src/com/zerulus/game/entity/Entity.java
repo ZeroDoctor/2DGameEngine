@@ -56,7 +56,7 @@ public abstract class Entity {
         }
 
         ani = new Animation();
-        setAnimation(LEFT, sprite.getSpriteArray(LEFT), 10);
+        setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 10);
     }
 
     public void setSprite(Sprite sprite) {

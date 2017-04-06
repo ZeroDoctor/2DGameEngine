@@ -54,9 +54,12 @@ public class TileMap {
     public void addBlock(int imageX, int imageY, Vector2f pos) {
     	if(blocks.containsKey(Integer.toString((int) pos.x / size) + "," + Integer.toString((int) pos.y / size))) {
             if(blocks.get(Integer.toString((int) pos.x / size) + "," + Integer.toString((int) pos.y / size)).getId() != (imageX + imageY * size)) {
+
                 System.out.println("Removing current block!");
-                //removeBlock(x, y);
-                blocks.put(Integer.toString((int) pos.x / size) + "," + Integer.toString((int) pos.y / size), new Block(imageX, imageY, size, pos.getWorldVar(), this));
+                removeBlock((int) pos.x, (int) pos.y);
+                blocks.put(Integer.toString((int) pos.x / size) + "," + Integer.toString((int) pos.y / size),
+                                new Block(imageX, imageY, size, pos, this));
+
             } else {
                 System.out.println("Why? Its the same block!");
             }
@@ -71,10 +74,10 @@ public class TileMap {
                     int yt = ((int) pos.y / TileManager.minBlockSize) + ((int) (i / (size / TileManager.minBlockSize)) );
 
                     blocks.put(Integer.toString(xt) + "," + Integer.toString(yt),
-                                    new Block(imageX, imageY, size, pos.getWorldVar(), this));
+                                    new Block(imageX, imageY, size, pos, this));
                 }
     		} else {
-                    System.out.println("Key: " + (pos.x / size) + ", " + ((pos.y / size)) + "\nBlock: " + pos + "\nWorldBlock: " + pos.getWorldVar());
+                    System.out.println("Key: " + (pos.x / size) + ", " + ((pos.y / size)) + "\nWorldLocation: " + pos);
                     blocks.put(Integer.toString((int) pos.x / size) + "," + Integer.toString((int) (pos.y / size)),
                                     new Block(imageX, imageY, size, pos, this));
     		}

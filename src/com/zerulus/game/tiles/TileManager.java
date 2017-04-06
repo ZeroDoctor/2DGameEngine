@@ -54,20 +54,24 @@ public class TileManager {
 
 	public void setTileMapSize(int id, int w, int h) {
 		ts[id].setSize(w, h);
-		minBlockSize = Math.min(minBlockSize, Math.max(w, h));
+		findMinBlockSize();
 	}
 
 	private void findMinBlockSize() {
-		for(int i = 0; i < sheetCount; i++) {
-			minBlockSize = Math.min(minBlockSize, ts[i].getSize());
+		if(sheetCount == 1) {
+			minBlockSize = Math.min(minBlockSize, ts[sheetCount - 1].getSize());
+		} else {
+			for(int i = 0; i <= sheetCount - 2; i++) {
+				minBlockSize = Math.min(ts[i].getSize(), ts[i + 1].getSize());
+			}
 		}
 	}
 
 	public void addTileMap(TileMap ts) {
-		findMinBlockSize();
 		if(sheetCount <= 6) {
 		    this.ts[sheetCount++] = ts;
 		    this.ts[sheetCount - 1].setView(BACK);
+			findMinBlockSize();
 		}
 		else
 		    System.out.println("You have exceed the max amount of tile sheets");
@@ -88,9 +92,6 @@ public class TileManager {
 	public void setView(int view, int tileSheet) {
 	    if(tileSheet > sheetCount) {
 	        System.out.println("That tile sheet does not exist");
-	    }
-	    else if (view > 3) {
-	        System.out.println("No such layer");
 	    } else {
 	        ts[tileSheet].setView(view);
 	    }
@@ -104,6 +105,7 @@ public class TileManager {
 
 		for(int i = 0; i < sheetCount; i++) {
 			if(ts[i].toString().equals(tileSheet)) {
+				System.out.println("Changing view : " + tileSheet);
 				ts[i].setView(view);
 			}
 		}

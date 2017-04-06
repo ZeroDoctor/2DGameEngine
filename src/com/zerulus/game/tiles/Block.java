@@ -3,7 +3,6 @@ package com.zerulus.game.tiles;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import com.zerulus.hub.GamePanel;
 import com.zerulus.game.util.Vector2f;
 
 public class Block {
@@ -21,7 +20,7 @@ public class Block {
         this.imageX = imageX;
         this.imageY = imageY;
         this.size = size;
-        
+
         if((imageX + imageY * size) != -1)
             img = ts.getTileSprite().getSprite(imageX, imageY);
     }
@@ -34,7 +33,7 @@ public class Block {
 
     public void render(Graphics2D g) {
         if(once) {
-            System.out.println("TrueBlockPos: " + pos.getWorldVar().x + "," + pos.getWorldVar().y);
+            System.out.println("JPanelLocation: " + pos.getWorldVar().x + "," + pos.getWorldVar().y);
             once = false;
         }
 

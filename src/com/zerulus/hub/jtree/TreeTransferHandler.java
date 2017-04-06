@@ -16,7 +16,6 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
-import com.zerulus.hub.GamePanel;
 import com.zerulus.game.states.PlayState;
 
 import com.zerulus.hub.tiletab.TileSetTab;
@@ -26,7 +25,9 @@ import com.zerulus.hub.tiletab.TileSetTab;
  * @author DanielCastro
  */
 public class TreeTransferHandler extends TransferHandler {
-    private DataFlavor nodesFlavor;
+	private static final long serialVersionUID = 1L;
+	
+	private DataFlavor nodesFlavor;
     private DataFlavor[] flavors = new DataFlavor[1];
     private DefaultMutableTreeNode[] nodesToRemove;
 
@@ -265,8 +266,9 @@ public class TreeTransferHandler extends TransferHandler {
 
         try {
 
-            List data = (List) t.getTransferData(DataFlavor.javaFileListFlavor);
-            Iterator i = data.iterator();
+            @SuppressWarnings("unchecked")
+			List<Object> data = (List<Object>) t.getTransferData(DataFlavor.javaFileListFlavor);
+            Iterator<Object> i = data.iterator();
 
             MyTree tree = (MyTree) comp;
             DefaultTreeModel model = (DefaultTreeModel) tree.getModel();

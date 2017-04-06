@@ -5,7 +5,6 @@ import com.zerulus.game.tiles.TileManager;
 import com.zerulus.game.util.InputHandler;
 import com.zerulus.game.util.MouseHandler;
 import com.zerulus.game.util.Vector2f;
-import java.util.Vector;
 
 public class TestBlock {
 
@@ -35,12 +34,12 @@ public class TestBlock {
         if(mouse.getButton() == 1 && notClicked) {
         	if(mouse.game.hasFocus()) {
 
-                int x = (int) (mouse.getX() + (Vector2f.worldX + (Vector2f.worldX % 32)));
-        		int y = (int) (mouse.getY() + (Vector2f.worldY + (Vector2f.worldY % 32)));
+                int x = (int) (mouse.getX() + (Vector2f.worldX + (Vector2f.worldX % (GamePanel.scale * TileManager.minBlockSize) )));
+        		int y = (int) (mouse.getY() + (Vector2f.worldY + (Vector2f.worldY % (GamePanel.scale * TileManager.minBlockSize) )));
 
-        		tm.addBlock(imageX, imageY, new Vector2f((int) ( ((x - (x % (GamePanel.scale * 16) )) + (Vector2f.worldX - (Vector2f.worldX % (GamePanel.scale * 16))) ) / GamePanel.scale) ,
-        				(int) ( ((y - (y % (GamePanel.scale * 16) )) + (Vector2f.worldY - (Vector2f.worldY % (GamePanel.scale * 16))) ) / GamePanel.scale)), id);
-                        //- (int) ( (32 - (Vector2f.worldY % 32)) - (32 - (y % 32)) ) ), 0);
+        		tm.addBlock(imageX, imageY, new Vector2f(
+                        (int) ( ((x - (x % (GamePanel.scale * TileManager.minBlockSize) )) + (Vector2f.worldX - (Vector2f.worldX % (GamePanel.scale * TileManager.minBlockSize))) ) / GamePanel.scale) ,
+        				(int) ( ((y - (y % (GamePanel.scale * TileManager.minBlockSize) )) + (Vector2f.worldY - (Vector2f.worldY % (GamePanel.scale * TileManager.minBlockSize))) ) / GamePanel.scale)), id);
 
         	} else {
         		mouse.game.requestFocusInWindow();
@@ -51,8 +50,12 @@ public class TestBlock {
         }
 
         if(mouse.getButton() == 3 && notClicked) {
-        	/*tm.removeBlock((mouse.getX() - (mouse.getX() % (GamePanel.scale * 16) )) / GamePanel.scale,
-            		(mouse.getY() - (mouse.getY() % (GamePanel.scale * 16) )) / GamePanel.scale, 0);*/
+
+            int x = (int) (mouse.getX() + (Vector2f.worldX + (Vector2f.worldX % (GamePanel.scale * TileManager.minBlockSize) )));
+            int y = (int) (mouse.getY() + (Vector2f.worldY + (Vector2f.worldY % (GamePanel.scale * TileManager.minBlockSize) )));
+
+        	tm.removeBlock((int) ( ((x - (x % (GamePanel.scale * TileManager.minBlockSize) )) + (Vector2f.worldX - (Vector2f.worldX % (GamePanel.scale * TileManager.minBlockSize))) ) / GamePanel.scale) ,
+                            (int) ( ((y - (y % (GamePanel.scale * TileManager.minBlockSize) )) + (Vector2f.worldY - (Vector2f.worldY % (GamePanel.scale * TileManager.minBlockSize))) ) / GamePanel.scale), id);
         	notClicked = false;
         }
 

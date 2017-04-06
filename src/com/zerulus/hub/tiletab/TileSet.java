@@ -5,8 +5,9 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
+
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.JPanel;
 
 import com.zerulus.game.states.PlayState;
 
@@ -14,15 +15,12 @@ import com.zerulus.game.states.PlayState;
 
 
 public class TileSet extends JPanel {
-
-    private File f;
+	private static final long serialVersionUID = 1L;
     private BufferedImage image;
     private BufferedImage test;
 
     private TabMouseHandler mouse;
     private Dimension size;
-    private int tilesetWidth;
-    private int tilesetHeight;
 
     private int xSelector = 0;
     private int ySelector = 0;
@@ -32,7 +30,6 @@ public class TileSet extends JPanel {
     private int height = 0;
 
     public TileSet(File f, Dimension size, PlayState ps, int id) {
-        this.f = f;
         this.size = size;
 
         try {
