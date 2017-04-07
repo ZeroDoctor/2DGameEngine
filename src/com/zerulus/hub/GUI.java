@@ -261,8 +261,8 @@ public class GUI extends javax.swing.JFrame {
         openProject.setText("Open Project");
         jMenu3.add(openProject);
         	openProject.addActionListener(new java.awt.event.ActionListener(){
-        		public void actionPerformed(java.awt.event.ActionEvent evt){
-							
+        		public void actionPerformed(java.awt.event.ActionEvent evt){  			
+        			
         		}
         	});
         Save.setText("Save");
@@ -271,7 +271,9 @@ public class GUI extends javax.swing.JFrame {
         saveAs.setText("Save as");
         saveAs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+            	String userHomeFolder = System.getProperty("Desktop");
+    			File dir = new File(userHomeFolder,"GameProject");
+    			dir.mkdir();
             }
         });
         jMenu3.add(saveAs);
