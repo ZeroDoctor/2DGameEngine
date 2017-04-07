@@ -271,7 +271,7 @@ public class GUI extends javax.swing.JFrame {
         saveAs.setText("Save as");
         saveAs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	String userHomeFolder = System.getProperty("Desktop");
+            	String userHomeFolder = System.getProperty("user.home");
     			File dir = new File(userHomeFolder,"GameProject");
     			dir.mkdir();
             }
