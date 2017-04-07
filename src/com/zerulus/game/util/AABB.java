@@ -2,6 +2,7 @@ package com.zerulus.game.util;
 
 import com.zerulus.game.tiles.TileManager;
 import com.zerulus.game.tiles.TileMap;
+import com.zerulus.game.entity.Enemy;
 
 //Sort of
 public class AABB {
@@ -11,7 +12,9 @@ public class AABB {
     private float yOffset = 0;
     private float w;
     private float h;
+    private float r;
     private int size;
+    private Enemy e;
 
     public AABB(Vector2f pos, int w, int h) {
         this.pos = pos;
@@ -19,6 +22,16 @@ public class AABB {
         this.h = h;
 
         size = Math.max(w, h);
+    }
+
+    public AABB(Vector2f pos, int r, Enemy e) {
+        this.pos = pos;
+        this.pos.x = pos.x - r / 2 + e.getSize() / 2;
+        this.pos.y = pos.y - r / 2 + e.getSize() / 2;
+        this.r = r;
+        this.e = e;
+
+        size = r;
     }
 
     public void setBox(Vector2f pos, int w, int h) {
@@ -29,8 +42,16 @@ public class AABB {
         size = Math.max(w, h);
     }
 
+    public void setCircle(Vector2f pos, int r) {
+        this.pos = pos;
+        this.r = r;
+
+        size = r;
+    }
+
     public Vector2f getPos() { return pos; }
 
+    public float getRadius() { return r; }
     public float getWidth() { return w; }
     public float getHeight() { return h; }
     public float getXOffset() { return xOffset; }
@@ -77,6 +98,21 @@ public class AABB {
         }
 
         return false;
+    }
+
+    public boolean colCircleBox(AABB aBox) {
+
+        float cx = (float) (this.pos.getWorldVar().x + r / Math.sqrt(2) - e.getSize() / Math.sqrt(2));
+        float cy = (float) (this.pos.getWorldVar().y + r / Math.sqrt(2) - e.getSize() / Math.sqrt(2));
+
+        float xDelta = cx - Math.max(aBox.pos.getWorldVar().x + (aBox.getWidth() / 2), Math.min(cx, aBox.pos.getWorldVar().x));
+        float yDelta = cy - Math.max(aBox.pos.getWorldVar().y + (aBox.getWidth() / 2), Math.min(cy, aBox.pos.getWorldVar().y));
+
+        if((xDelta * xDelta + yDelta * yDelta) < ((this.r / Math.sqrt(2)) * (this.r / Math.sqrt(2)))) {
+			return true;
+		}
+
+		return false;
     }
 
     /* TODO: Improve collision design

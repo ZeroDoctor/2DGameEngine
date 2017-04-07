@@ -63,6 +63,7 @@ public abstract class Entity {
         this.sprite = sprite;
     }
 
+    public int getSize() { return size; }
     public void setSize(int i) { size = i; }
     public void setMaxSpeed(float i) { maxSpeed = i; }
     public void setAcc(float i) { acc = i; }
