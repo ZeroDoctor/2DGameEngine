@@ -27,34 +27,26 @@ public class Enemy extends Entity{
     }
 
     public void chase(Player p) {
-        if(p.getPos().x > pos.x) {
-            right = true;
-            circleBounds.getPos().x += dx;
-            hitBounds.getPos().x += dx;
-            pos.x += dx;
-            left = false;
-        }
-        else {
-            left = true;
-            circleBounds.getPos().x += dx;
-            hitBounds.getPos().x += dx;
-            pos.x += dx;
-            right = false;
-        }
-
-        if(p.getPos().y > pos.y) {
+		/*if(p.getPos().y > pos.y) {
             up = false;
-            circleBounds.getPos().y += dy;
-            hitBounds.getPos().y += dy;
-            pos.y += dy;
-            down = true;
-        } else {
+			down = true;
+        } else { 
             down = false;
-            circleBounds.getPos().y += dy;
-            hitBounds.getPos().y += dy;
-            pos.y += dy;
-            up = true;
+			up = true;
         }
+        if(p.getPos().x > pos.x) {
+			right = true;
+            left = false;
+        } else {
+			left = true;
+            right = false;
+        }*/
+		
+		double ax = p.getPos().x - pos.x;
+		double ay = p.getPos().y - pos.y;
+		double rad = Math.atan2(ay, ax);
+		System.out.println(rad);
+		
     }
 
     public void update(Player p) {
@@ -62,6 +54,14 @@ public class Enemy extends Entity{
 
         if(circleBounds.colCircleBox(p.getBounds())) {
             chase(p);
+			
+			circleBounds.getPos().x += dx;
+            hitBounds.getPos().x += dx;
+            pos.x += dx;
+			
+			circleBounds.getPos().y += dy;
+            hitBounds.getPos().y += dy;
+            pos.y += dy;
         } else {
             right = false;
             left = false;
@@ -84,7 +84,7 @@ public class Enemy extends Entity{
 
     	if(attacking) {
             g.setColor(Color.red);
-            g.drawRect((int) hitBounds.getPos().getWorldVar().x, (int) hitBounds.getPos().getWorldVar().y,
+            g.drawRect((int) (hitBounds.getPos().getWorldVar().x + hitBounds.getXOffset()), (int) (hitBounds.getPos().getWorldVar().y + hitBounds.getYOffset()),
                         (int) hitBounds.getWidth(), (int) hitBounds.getHeight());
     	}
         g.setColor(Color.green);
